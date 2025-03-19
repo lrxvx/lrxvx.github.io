@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>如何用下班后3小时启动副业？ - 实用指南</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0070f3;
+            --secondary-color: #6d28d9;
+            --accent-color: #f59e0b;
+            --text-color: #1f2937;
+            --bg-color: #ffffff;
+            --card-bg: #f9fafb;
+            --border-color: #e5e7eb;
+            --highlight: #f3f4f6;
+        }
+
+        .dark {
+            --primary-color: #3b82f6;
+            --secondary-color: #8b5cf6;
+            --accent-color: #fbbf24;
+            --text-color: #e5e7eb;
+            --bg-color: #111827;
+            --card-bg: #1f2937;
+            --border-color: #374151;
+            --highlight: #374151;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn {
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.03);
+        }
+
+        .chart-container {
+            height: 300px;
+            width: 100%;
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 0.5rem;
+            height: 1rem;
+            width: 1rem;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+
+        /* 淡入动画 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        /* 延迟动画应用 */
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <header class="py-6 border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-white dark:bg-gray-900 z-10 shadow-sm">
+        <div class="container flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-white">副业指南</h1>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <svg id="sun-icon" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                    <svg id="moon-icon" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+                <button class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg font-medium btn">
+                    开始行动
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container py-12">
+        <article class="max-w-3xl mx-auto">
+            <!-- 标题区域 -->
+            <div class="mb-12 text-center fade-in">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">如何用下班后3小时启动副业？</h1>
+                <p class="text-lg text-gray-600 dark:text-gray-400 mt-4">高效利用碎片时间，打造属于自己的可持续收入来源</p>
+                <div class="flex justify-center mt-6 space-x-4">
+                    <span class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900 dark:text-blue-200">
+                        <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
+                        阅读时间：5分钟
+                    </span>
+                    <span class="inline-flex items-center px-3 py-1 bg-purple-100 text-purple-800 text-sm font-medium rounded-full dark:bg-purple-900 dark:text-purple-200">
+                        <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                        最后更新：2025年03月
+                    </span>
+                </div>
+            </div>
+
+            <!-- 介绍部分 -->
+            <div class="mb-12 fade-in delay-1">
+                <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+                    <p class="text-lg leading-relaxed">真正有效的3小时能做很多事。假设每天有3个小时可以有效投入，不管是上班路上、工作间隙（摸鱼）、下班后，还是周末。</p>
+                    <p class="text-lg leading-relaxed mt-4">关于如何利用这3个小时从零开启副业，我给出一份完整的建议。</p>
+                </div>
+            </div>
+
+            <!-- 副业认知 -->
+            <section class="mb-16 fade-in delay-2">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="inline-block w-8 h-8 mr-2 flex items-center justify-center rounded-full bg-blue-500 text-white">1</span>
+                    重新定义副业
+                </h2>
+                
+                <div class="card p-6 mb-8">
+                    <p class="mb-4">用一句话解释就是：<span class="font-semibold text-blue-600 dark:text-blue-400">不依赖公司，建立一套属于自己的、可持续、可积累、可产生复利、可放大规模的生意。</span></p>
+                    
+                    <p class="mb-4">在开启副业之前，需要明白一件事：<span class="italic">赚钱是价值的交换，是满足需求、解决问题，是一手交钱、一手交货</span>。</p>
+
+                    <div class="mt-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
+                        <h4 class="font-bold text-yellow-800 dark:text-yellow-400 mb-2">重点</h4>
+                        <p>于是，重点就来了：<span class="font-semibold">客户、产品、销售（把产品卖出去）</span>。</p>
+                        <p class="mt-2">你需要找到两样东西：客户和产品，同时锻炼一种能力：销售能力。</p>
+                    </div>
+                </div>
+
+                <!-- 副业要素三角形图 -->
+                <div class="chart-container mb-8">
+                    <svg width="100%" height="100%" viewBox="0 0 400 300" class="mx-auto">
+                        <defs>
+                            <linearGradient id="triangleFill" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.7" />
+                                <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.7" />
+                            </linearGradient>
+                        </defs>
+                        <!-- 三角形 -->
+                        <path d="M200,50 L50,250 L350,250 Z" fill="url(#triangleFill)" stroke="#4f46e5" stroke-width="2" />
+                        
+                        <!-- 文字标签 -->
+                        <text x="200" y="40" text-anchor="middle" font-size="18" font-weight="bold" fill="currentColor">客户</text>
+                        <text x="35" y="270" text-anchor="middle" font-size="18" font-weight="bold" fill="currentColor">产品</text>
+                        <text x="365" y="270" text-anchor="middle" font-size="18" font-weight="bold" fill="currentColor">销售</text>
+                        
+                        <!-- 中心文字 -->
+                        <text x="200" y="170" text-anchor="middle" font-size="20" font-weight="bold" fill="currentColor">副业成功</text>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- 副业难点 -->
+            <section class="mb-16 fade-in delay-3">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="inline-block w-8 h-8 mr-2 flex items-center justify-center rounded-full bg-blue-500 text-white">2</span>
+                    真正的难点
+                </h2>
+                
+                <div class="card p-6 mb-8">
+                    <p class="mb-4">真正的难点在哪里呢？在于<span class="font-semibold text-blue-600 dark:text-blue-400">客户和销售</span>。</p>
+                    
+                    <p class="mb-4">对于上班族而言，大部分人没什么人脉，认识的人不多，微信好友数量也有限。</p>
+                    
+                    <p class="mb-4">要是本职工作并非销售岗位，很可能销售能力严重欠缺，甚至很多人连社交能力和沟通能力都不足。</p>
+                    
+                    <p>由此可见，利用下班后三小时开展副业的重点在于，如何找到客户并锻炼自己的销售能力，进而把产品卖给他们。</p>
+                </div>
+
+                <!-- 为什么产品不是重点 -->
+                <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 mb-8">
+                    <h3 class="text-xl font-semibold mb-4">为什么不着重讨论产品？</h3>
+                    <p class="mb-3">因为这件事难度较大。</p>
+                    <p class="mb-3">除非你具备很强的专业能力，在某个领域深耕过，是这方面的专家，这样你才可以直接打造自己的产品。</p>
+                    <p>但这种情况并不适用于大多数人，所以我才把产品这一因素视为相对不那么重要的点。</p>
+                </div>
+
+                <!-- 两种产品方案 -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="card p-6 hover:border-blue-300 dark:hover:border-blue-700">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-3">
+                                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                            </div>
+                            <h3 class="text-lg font-semibold">售卖别人的产品</h3>
+                        </div>
+                        <p>做自营产品的人毕竟是少数，大多数人都是进货后再转手卖出。所以，售卖别人的产品没什么问题，不管是实体产品还是虚拟产品，都可以先从做代理开始，<span class="font-bold text-blue-600 dark:text-blue-400">先做代理，先做代理</span>。</p>
+                    </div>
+
+                    <div class="card p-6 hover:border-purple-300 dark:hover:border-purple-700">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center mr-3">
+                                <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                            </div>
+                            <h3 class="text-lg font-semibold">利用信息差销售</h3>
+                        </div>
+                        <p>自媒体的赚钱方式就两种：一种是接广告，另一种是卖产品。通过写文章、制作短视频、做直播等方式去寻找客户，建立信任，从而把产品卖出去。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 具体实施步骤 -->
+            <section class="mb-16 fade-in delay-4">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="inline-block w-8 h-8 mr-2 flex items-center justify-center rounded-full bg-blue-500 text-white">3</span>
+                    具体实施步骤
+                </h2>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold mb-3">第一步：搜集资料，选品</h3>
+                        <div class="card p-6">
+                            <p class="mb-3">从零起步做副业，一定要选择轻资产项目，尽可能不要囤货。</p>
+                            <p class="mb-3">要么做虚拟类产品，要么做一件代发，或者做赚取佣金的业务。</p>
+                            <p>去各大平台，比如短视频内容平台、电商平台，或者各类社群里，看看哪些产品卖得比较好。然后想办法拿到产品的代理权。</p>
+                            
+                            <div class="mt-4 grid grid-cols-3 gap-3">
+                                <div class="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-center">
+                                    <svg class="w-8 h-8 text-blue-500 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                    <p class="text-sm">虚拟产品</p>
+                                </div>
+                                <div class="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-center">
+                                    <svg class="w-8 h-8 text-blue-500 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10"></path></svg>
+                                    <p class="text-sm">一件代发</p>
+                                </div>
+                                <div class="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-center">
+                                    <svg class="w-8 h-8 text-blue-500 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <p class="text-sm">佣金模式</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold mb-3">第二步：找客户</h3>
+                        <div class="card p-6">
+                            <p class="mb-3">这里所说的找客户，并不是让你去做短视频、写文章。</p>
+                            <p class="mb-3">重点是要明确你的目标客户在哪里。如果他们集中在某些群里，或者某个圈子里，那就没必要去拍视频。</p>
+                            <p class="font-medium text-red-600 dark:text-red-400">这一步是最难解决的，很多人真正的卡点就在这儿，而且这是一个持续性的问题。</p>
+                            
+                            <div class="mt-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                                <h4 class="font-semibold mb-2">目标客户可能出现的地方：</h4>
+                                <ul class="list-disc pl-5 space-y-1">
+                                    <li>垂直社群/微信群</li>
+                                    <li>相关论坛与贴吧</li>
+                                    <li>行业展会与活动</li>
+                                    <li>专业平台与网站</li>
+                                    <li>社交媒体兴趣小组</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold mb-3">第三步：销售</h3>
+                        <div class="card p-6">
+                            <p class="mb-3">这属于能力范畴，是可以通过学习掌握的。有些人在这方面有一定天赋，做起来比较轻松，而有些人做起来则非常困难，并且不同的人有不同的销售方式。</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-4 mt-4">
+                                <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                                    <h4 class="font-semibold mb-2">销售方式：</h4>
+                                    <ul class="list-disc pl-5 space-y-1">
+                                        <li>线下面对面交流</li>
+                                        <li>电话推销</li>
+                                        <li>内容营销（文章、视频）</li>
+                                        <li>直播带货</li>
+                                        <li>转介绍与口碑传播</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                                    <h4 class="font-semibold mb-2">销售优势：</h4>
+                                    <ul class="list-disc pl-5 space-y-1">
+                                        <li>良好的社交关系</li>
+                                        <li>专业度与知识深度</li>
+                                        <li>严谨靠谱的形象</li>
+                                        <li>沟通与表达能力</li>
+                                        <li>客户需求洞察能力</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 时间分配与持续行动 -->
+            <section class="mb-16 fade-in delay-5">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="inline-block w-8 h-8 mr-2 flex items-center justify-center rounded-full bg-blue-500 text-white">4</span>
+                    持续行动与时间分配
+                </h2>
+
+                <div class="card p-6 mb-8">
+                    <p class="mb-4">选定产品之后，接下来要做的就是不断寻找目标客户，然后把产品卖给他们，持续重复这一过程。</p>
+                    
+                    <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg mb-6">
+                        <p class="font-medium">后续至少要将 <span class="text-blue-600 dark:text-blue-400 font-bold">70% - 80%</span> 的时间花在寻找新客户、开展销售工作或者促进客户复购上。</p>
+                    </div>
+                    
+                    <div class="relative h-12 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden mb-2">
+                        <div class="absolute left-0 top-0 bottom-0 w-3/4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-l-lg"></div>
+                        <div class="absolute left-0 top-0 bottom-0 w-full flex items-center">
+                            <span class="ml-4 font-medium text-white drop-shadow-sm">寻找客户与销售 (75%)</span>
+                            <span class="ml-auto mr-4 font-medium text-gray-700 dark:text-gray-300">其他工作 (25%)</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">建议的时间分配比例</p>
+
+                    <p class="mb-4">内容的作用多种多样，它可以用于获客，可以用来建立信任以促进销售，也可以作为一种交付内容，甚至内容本身也能成为产品。</p>
+                    
+                    <p>一款优质的产品或出色的交付成果，本身也能起到销售作用。有一种概念叫"会走路"或者"会说话"的产品。其前提是产品本身质量过硬或具有稀缺性，能够切实解决一部分用户的需求，进而引发社交裂变。</p>
+                </div>
+
+                <!-- 持之以恒 -->
+                <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-8 rounded-xl">
+                    <h3 class="text-xl font-bold mb-4">持之以恒是成功的关键</h3>
+                    <p class="mb-4">最后说实话，每天抽出三个小时，如果只是一两天，那不算什么。难点在于能够持续每天都拿出三个小时来做这些事。</p>
+                    <p class="mb-4">要是能做到这点，那么成功只是时间问题，可能三个月，可能半年，可能一年，也可能两三年。</p>
+                    <p class="font-bold">要知道，两三年做成一件事，时间并不算长。</p>
+                </div>
+            </section>
+
+            <!-- 副业成功时间线 -->
+            <section class="mb-16 fade-in delay-5">
+                <h2 class="text-2xl font-bold mb-6">副业成功预期时间线</h2>
+                
+                <div class="relative">
+                    <div class="absolute top-0 bottom-0 left-1/2 w-1 bg-gray-200 dark:bg-gray-700"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="flex items-center mb-8">
+                            <div class="w-full md:w-1/2 pr-8 md:text-right">
+                                <div class="card p-4 md:mr-8">
+                                    <h3 class="font-bold text-blue-600 dark:text-blue-400">3个月</h3>
+                                    <p>找到合适产品，掌握基本销售技巧</p>
+                                </div>
+                            </div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">1</span>
+                            </div>
+                            <div class="w-1/2 pl-8 hidden md:block"></div>
+                        </div>
+                        
+                        <div class="flex items-center mb-8">
+                            <div class="w-1/2 pr-8 hidden md:block"></div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">2</span>
+                            </div>
+                            <div class="w-full md:w-1/2 pl-8">
+                                <div class="card p-4 md:ml-8">
+                                    <h3 class="font-bold text-blue-600 dark:text-blue-400">6个月</h3>
+                                    <p>初步建立客户群体，实现稳定收入</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center mb-8">
+                            <div class="w-full md:w-1/2 pr-8 md:text-right">
+                                <div class="card p-4 md:mr-8">
+                                    <h3 class="font-bold text-blue-600 dark:text-blue-400">1年</h3>
+                                    <p>形成自己的销售模式和客户获取渠道</p>
+                                </div>
+                            </div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">3</span>
+                            </div>
+                            <div class="w-1/2 pl-8 hidden md:block"></div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-1/2 pr-8 hidden md:block"></div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">4</span>
+                            </div>
+                            <div class="w-full md:w-1/2 pl-8">
+                                <div class="card p-4 md:ml-8">
+                                    <h3 class="font-bold text-blue-600 dark:text-blue-400">2-3年</h3>
+                                    <p>副业收入可观，形成品牌效应和规模化运营</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 进一步阅读 -->
+            <section class="mb-16 fade-in delay-5">
+                <h2 class="text-2xl font-bold mb-6">进一步阅读</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="card p-6 hover:border-blue-300 dark:hover:border-blue-700">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-gradient-to-b from-blue-500 to-purple-600 rounded-md flex items-center justify-center mr-4 shrink-0">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-1">《副业赚钱：从0到1的完整指南》</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">克里斯·吉利博 著</p>
+                                <p class="text-sm">详细介绍如何发现市场机会，选择适合自己的副业项目，以及如何在有限时间内高效执行。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-6 hover:border-blue-300 dark:hover:border-blue-700">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-gradient-to-b from-blue-500 to-purple-600 rounded-md flex items-center justify-center mr-4 shrink-0">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-1">《精力管理：如何充分利用你的每一分钟》</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">吉姆·洛尔 & 托尼·施瓦茨 著</p>
+                                <p class="text-sm">解析如何在忙碌的工作之余，合理规划和利用时间，最大化个人精力输出。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-6 hover:border-blue-300 dark:hover:border-blue-700">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-gradient-to-b from-blue-500 to-purple-600 rounded-md flex items-center justify-center mr-4 shrink-0">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-1">《影响力：如何说服他人并成功销售》</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">罗伯特·西奥迪尼 著</p>
+                                <p class="text-sm">深入剖析影响他人决策的六大原理，对提升销售能力和客户沟通至关重要。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-6 hover:border-blue-300 dark:hover:border-blue-700">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-gradient-to-b from-blue-500 to-purple-600 rounded-md flex items-center justify-center mr-4 shrink-0">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-1">《轻创业：小投入打造被动收入》</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">李笑来 著</p>
+                                <p class="text-sm">讲述如何通过互联网平台和数字产品，创建自动化的收入来源，减少时间投入。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-6 hover:border-blue-300 dark:hover:border-blue-700">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-gradient-to-b from-blue-500 to-purple-600 rounded-md flex items-center justify-center mr-4 shrink-0">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-1">《专注力：如何在分心世界中保持高效》</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">卡尔·纽波特 著</p>
+                                <p class="text-sm">探讨如何在信息爆炸的时代，培养深度工作能力，在有限时间内创造最大价值。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <!-- 作者信息 -->
+    <footer class="bg-gray-50 dark:bg-gray-800 py-12 border-t border-gray-200 dark:border-gray-700">
+        <div class="container">
+            <div class="max-w-3xl mx-auto">
+                <div class="flex flex-col md:flex-row items-center justify-between">
+                    <div class="mb-6 md:mb-0 text-center md:text-left">
+                        <h3 class="text-xl font-bold mb-2">关于作者</h3>
+                        <p class="text-gray-600 dark:text-gray-400">小路，副业实践者 | 盖洛普优势教练 | 内容创作者</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-500 mt-1">公众号：小路成长笔记，微信：xiaoluv12</p>
+                    </div>
+                    
+                    <div class="flex space-x-4">
+                        <a href="https://github.com/author" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        </a>
+                        <a href="https://twitter.com/author" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+                        </a>
+                        <a href="https://linkedin.com/in/author" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+                    <p class="text-sm text-gray-500 dark:text-gray-400">&copy; 2023 副业指南. 保留所有权利.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 主题切换功能
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        
+        // 检查用户偏好
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        }
+        
+        // 切换主题
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            sunIcon.classList.toggle('hidden');
+            moonIcon.classList.toggle('hidden');
+        });
+        
+        // 添加淡入动画
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            fadeElements.forEach(element => {
+                // 确保元素可见
+                element.style.opacity = '1';
+            });
+            
+            // 添加滚动触发动画
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                element.style.animationPlayState = 'paused';
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
