@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片切片工具</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>图片切片工具</h1>
+            <p class="subtitle">自动将图片切分成指定比例的小图</p>
+        </header>
+        
+        <main>
+            <div class="upload-section">
+                <label for="imageInput" class="upload-button">
+                    <span>选择图片</span>
+                    <input type="file" id="imageInput" accept="image/*">
+                </label>
+                <div id="fileName" class="file-name"></div>
+            </div>
+            
+            <div class="preview-container" id="previewContainer">
+                <img id="imagePreview" class="hidden">
+            </div>
+            
+            <div class="options-section hidden" id="optionsSection">
+                <h2>设置切片比例</h2>
+                <div class="ratio-container">
+                    <div class="ratio-selector">
+                        <label class="ratio-label">
+                            <input type="radio" name="ratio" value="3:4" checked>
+                            <span>小红书 (3:4)</span>
+                        </label>
+                        <label class="ratio-label">
+                            <input type="radio" name="ratio" value="9:16">
+                            <span>抖音 (9:16)</span>
+                        </label>
+                        <label class="ratio-label">
+                            <input type="radio" name="ratio" value="1:1">
+                            <span>正方形 (1:1)</span>
+                        </label>
+                    </div>
+                    <div class="custom-ratio">
+                        <label>自定义比例:</label>
+                        <div class="ratio-inputs">
+                            <input type="number" id="ratioWidth" min="1" value="3" class="ratio-input">
+                            <span>:</span>
+                            <input type="number" id="ratioHeight" min="1" value="4" class="ratio-input">
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="sliceButton" class="slice-button">切片图片</button>
+            </div>
+            
+            <div class="result-section hidden" id="resultSection">
+                <h2>切片结果</h2>
+                <div id="resultGallery" class="result-gallery"></div>
+                <div class="action-buttons">
+                    <button id="downloadAllButton" class="download-button">下载所有切片</button>
+                    <button id="resetButton" class="reset-button">重新开始</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>使用说明：</p>
+            <ol>
+                <li>点击"选择图片"上传需要切片的图片</li>
+                <li>选择预设比例或自定义比例</li>
+                <li>点击"切片图片"进行自动切片</li>
+                <li>可以单独下载每个切片，或一次性下载所有切片</li>
+            </ol>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
