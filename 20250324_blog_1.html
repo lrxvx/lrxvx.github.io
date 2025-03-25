@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自媒体暴富后的陷阱：1000万被骗教训深度分析</title>
+    <meta name="description" content="深度分析自媒体从业者从暴富到被骗1000万的全过程，揭示7个关键教训">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            300: '#c4b5fd',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                        },
+                        dark: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans SC"', 'system-ui', '-apple-system', 'sans-serif'],
+                        serif: ['"Noto Serif SC"', 'Georgia', 'serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap');
+        
+        body {
+            @apply bg-white dark:bg-dark-900 text-dark-800 dark:text-gray-200 font-sans antialiased;
+            transition: background-color 0.3s ease;
+        }
+        
+        .prose {
+            @apply max-w-none;
+        }
+        
+        .prose h2 {
+            @apply text-2xl font-bold mt-10 mb-4 text-primary-700 dark:text-primary-400 border-b pb-2 border-gray-200 dark:border-dark-700;
+        }
+        
+        .prose h3 {
+            @apply text-xl font-semibold mt-8 mb-3 text-secondary-700 dark:text-secondary-400;
+        }
+        
+        .prose p {
+            @apply my-4 leading-relaxed;
+        }
+        
+        .prose ul {
+            @apply list-disc pl-5 space-y-2;
+        }
+        
+        .prose ol {
+            @apply list-decimal pl-5 space-y-2;
+        }
+        
+        .prose li {
+            @apply my-2;
+        }
+        
+        .prose blockquote {
+            @apply border-l-4 border-primary-500 pl-4 italic bg-gray-50 dark:bg-dark-800 py-2 my-4;
+        }
+        
+        .prose a {
+            @apply text-primary-600 dark:text-primary-400 hover:underline;
+        }
+        
+        .card {
+            @apply bg-white dark:bg-dark-800 rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-gray-100 dark:border-dark-700;
+        }
+        
+        .timeline-item {
+            @apply relative pl-8 pb-8 border-l-2 border-primary-500;
+        }
+        
+        .timeline-item:last-child {
+            @apply pb-0;
+        }
+        
+        .timeline-dot {
+            @apply absolute w-4 h-4 rounded-full bg-primary-500 left-[-9px] top-0;
+        }
+        
+        .chart-container {
+            @apply bg-white dark:bg-dark-800 rounded-lg p-4 shadow-sm;
+        }
+        
+        .tooltip {
+            @apply invisible absolute;
+        }
+        
+        .has-tooltip:hover .tooltip {
+            @apply visible z-50;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-dark-900/80 backdrop-blur-md border-b border-gray-200 dark:border-dark-700">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-primary-600 dark:text-primary-400 flex items-center">
+                <i class="fas fa-chart-line mr-2"></i>
+                <span>小路洞察</span>
+            </a>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-dark-700">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block"></i>
+                </button>
+                <a href="#" class="hidden md:inline-block px-4 py-2 rounded-lg bg-primary-600 hover:bg-primary-700 text-white transition-colors">
+                    订阅分析
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-5xl">
+        <!-- 文章标题区 -->
+        <section class="mb-12 text-center">
+            <span class="inline-block px-3 py-1 text-sm font-medium rounded-full bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 mb-4">
+                深度分析
+            </span>
+            <h1 class="text-4xl md:text-5xl font-bold text-dark-900 dark:text-white mb-6 leading-tight">
+                自媒体暴富后的陷阱：<br>
+                <span class="text-primary-600 dark:text-primary-400">1000万被骗教训</span>深度分析
+            </h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                一位年入百万的B站UP主如何陷入精心设计的骗局，从财务自由到负债累累的完整心路历程与7个关键教训
+            </p>
+            <div class="mt-8 flex justify-center items-center space-x-4">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-full bg-primary-500 flex items-center justify-center text-white mr-3">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium">小路</p>
+                        <p class="text-xs text-gray-500">发布于 2025年03月24日</p>
+                    </div>
+                </div>
+                <div class="h-8 border-l border-gray-300 dark:border-dark-600"></div>
+                <div class="flex items-center space-x-2">
+                    <span class="text-sm text-gray-500 dark:text-gray-400">阅读时间: 8分钟</span>
+                    <span class="text-xs text-gray-400">•</span>
+                    <span class="text-sm text-gray-500 dark:text-gray-400">分享:</span>
+                    <a href="#" class="text-gray-500 hover:text-primary-500 dark:hover:text-primary-400">
+                        <i class="fab fa-weixin"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-primary-500 dark:hover:text-primary-400">
+                        <i class="fab fa-weibo"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-primary-500 dark:hover:text-primary-400">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 封面图 -->
+        <section class="mb-12 rounded-xl overflow-hidden shadow-lg">
+            <div class="relative h-64 md:h-96 bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center">
+                <div class="text-center px-8 z-10">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">财富自由 ≠ 财务智慧</h2>
+                    <p class="text-lg text-white/90 max-w-2xl mx-auto">一夜暴富的年轻自媒体人如何成为骗子的完美猎物</p>
+                </div>
+                <div class="absolute inset-0 bg-black/20"></div>
+            </div>
+        </section>
+
+        <!-- 关键数据概览 -->
+        <section class="mb-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="card p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-semibold text-lg text-gray-700 dark:text-gray-300">被骗金额</h3>
+                    <div class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/50 flex items-center justify-center">
+                        <i class="fas fa-money-bill-wave text-red-500 dark:text-red-400"></i>
+                    </div>
+                </div>
+                <p class="text-3xl font-bold text-red-500 dark:text-red-400">1000万</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">6位UP主共同被骗</p>
+            </div>
+            
+            <div class="card p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-semibold text-lg text-gray-700 dark:text-gray-300">暴富时间</h3>
+                    <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center">
+                        <i class="fas fa-rocket text-green-500 dark:text-green-400"></i>
+                    </div>
+                </div>
+                <p class="text-3xl font-bold text-green-500 dark:text-green-400">6个月</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">从月薪1万到年入百万</p>
+            </div>
+            
+            <div class="card p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-semibold text-lg text-gray-700 dark:text-gray-300">关键教训</h3>
+                    <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center">
+                        <i class="fas fa-lightbulb text-blue-500 dark:text-blue-400"></i>
+                    </div>
+                </div>
+                <p class="text-3xl font-bold text-blue-500 dark:text-blue-400">7个</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">避免类似陷阱的核心原则</p>
+            </div>
+        </section>
+
+        <!-- 文章内容 -->
+        <article class="prose dark:prose-invert max-w-none mb-12">
+            <h2>事件回顾：从暴富到被骗的全过程</h2>
+            
+            <div class="timeline-container my-8">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="card p-6">
+                        <h3 class="text-lg font-semibold mb-2">普通打工人阶段</h3>
+                        <p class="text-gray-600 dark:text-gray-300">月薪1万左右的普通上班族，生活稳定但没有太多积蓄</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="card p-6">
+                        <h3 class="text-lg font-semibold mb-2">自媒体爆发期</h3>
+                        <p class="text-gray-600 dark:text-gray-300">开始在B站制作内容，半年内粉丝暴涨，年收入达到数百万</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="card p-6">
+                        <h3 class="text-lg font-semibold mb-2">心态变化期</h3>
+                        <p class="text-gray-600 dark:text-gray-300">财富快速积累导致心态膨胀，对金钱失去敏感度</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="card p-6">
+                        <h3 class="text-lg font-semibold mb-2">遇见"大哥"</h3>
+                        <p class="text-gray-600 dark:text-gray-300">结识自称餐饮大亨的"贵人"，被其财富和人脉展示所吸引</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="card p-6">
+                        <h3 class="text-lg font-semibold mb-2">投资陷阱</h3>
+                        <p class="text-gray-600 dark:text-gray-300">在无合同情况下，联合其他UP主共同投资1000万开餐饮店</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="card p-6">
+                        <h3 class="text-lg font-semibold mb-2">骗局暴露</h3>
+                        <p class="text-gray-600 dark:text-gray-300">"大哥"携款跑路，留下巨额债务和破碎的财富梦</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h2>骗局如何一步步展开</h2>
+            
+            <div class="my-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mr-4">
+                            <i class="fas fa-fish text-red-500 dark:text-red-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold">定向钓鱼</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300">骗子专门瞄准那些靠自媒体一夜暴富但缺乏财务经验的年轻人。他们研究目标的心理弱点，量身定制骗局。</p>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center mr-4">
+                            <i class="fas fa-theater-masks text-yellow-500 dark:text-yellow-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold">身份包装</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300">"大哥"精心打造富豪人设：豪车、明星人脉、看似成功的商业帝国。所有展示都旨在建立可信度和吸引力。</p>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-4">
+                            <i class="fas fa-brain text-blue-500 dark:text-blue-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold">心理操控</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300">通过逐步洗脑，让受害者对金钱失去概念，觉得几十万都是"小钱"。同时制造稀缺感，让人害怕错失机会。</p>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mr-4">
+                            <i class="fas fa-hand-holding-usd text-green-500 dark:text-green-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold">利益诱惑</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300">承诺高额回报和"稳赚不赔"的投资机会，利用受害者贪图轻松赚钱的心理。</p>
+                </div>
+            </div>
+            
+            <h2>七个血泪教训</h2>
+            
+            <div class="my-8 space-y-6">
+                <div class="card p-6 hover:border-primary-500 transition-colors">
+                    <div class="flex items-start">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 font-bold mr-4 flex-shrink-0">1</span>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">做能力范围内的事，赚能力范围内的钱</h3>
+                            <p class="text-gray-600 dark:text-gray-300">基本上，你能赚到并且守得住的钱，都是在自己能力范围之内的。因为你了解相关领域，有经验，就算赚得少一些，也不至于掉进大的陷阱。进入一个陌生行业，交学费是难免的，但一定要有风险意识，而不是一股脑把全部家当都投进去。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-6 hover:border-secondary-500 transition-colors">
+                    <div class="flex items-start">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-secondary-100 text-secondary-800 dark:bg-secondary-900 dark:text-secondary-200 font-bold mr-4 flex-shrink-0">2</span>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">克制贪欲，这世上没有免费的午餐</h3>
+                            <p class="text-gray-600 dark:text-gray-300">你惦记着后面的分红，想着躺赚，可别人盯着的却是你的本金。任何让你觉得不可思议的承诺，那些让你感觉自己能赚大了、能躺赚的事情，大概率都是假的。就好比现在有人跟你说："你现在转给我10万，一年后我给你20万。"你会相信吗？</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-6 hover:border-yellow-500 transition-colors">
+                    <div class="flex items-start">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 font-bold mr-4 flex-shrink-0">3</span>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">有实力，到哪里都有圈子；融不进去的圈子，进去也是养料</h3>
+                            <p class="text-gray-600 dark:text-gray-300">融不进去的圈子就别硬融，尤其是当你发觉这个圈子和你的层次差距太大时，这表明当下还不是时候，等时机成熟了自然就能融入。这个up主首先是被欲望冲昏了头脑，看到所谓再次逆天改命的机会，同时又极度担心自己无法错失机会。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-6 hover:border-red-500 transition-colors">
+                    <div class="flex items-start">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 font-bold mr-4 flex-shrink-0">4</span>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">不要负债，不要负债，千万不要负债</h3>
+                            <p class="text-gray-600 dark:text-gray-300">要量力而行，有多少钱就办多大的事。这不仅适用于投资赚钱，像买房买车这种大额支出的情况，还有日常消费也是一样。当你的支出远远超出自己的能力时，这里所说的能力，不是指你预估未来能赚多少钱，而是你当下实际拥有的财富。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-6 hover:border-green-500 transition-colors">
+                    <div class="flex items-start">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 font-bold mr-4 flex-shrink-0">5</span>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">别高估自己</h3>
+                            <p class="text-gray-600 dark:text-gray-300">很多人作为旁观者时，觉得自己肯定不会上当，觉得自己看得明明白白，心想这么明显的事，怎么还会有人上当呢？但只有当事人才清楚自己当时的心理状态。有时候，越是那种自认为不会上当的人，反而越容易掉进陷阱。承认自己会上当，承认自己很蠢。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-6 hover:border-blue-500 transition-colors">
+                    <div class="flex items-start">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 font-bold mr-4 flex-shrink-0">6</span>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">普通人赚钱一定要借助杠杆</h3>
+                            <p class="text-gray-600 dark:text-gray-300">这个up主就是踩中了自媒体的红利，借助自媒体杠杆，年纪轻轻就年入几百万。普通人能够借助的杠杆就是自媒体和编程。它们的特点是使用成本很低很低，没什么门槛，但却能够放大收益。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-6 hover:border-purple-500 transition-colors">
+                    <div class="flex items-start">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 font-bold mr-4 flex-shrink-0">7</span>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">赚一时的钱容易，一直赚钱却很难</h3>
+                            <p class="text-gray-600 dark:text-gray-300">有赚钱机会，能赚到钱的时候，就要抓紧多赚一些。同时，不要过度增加开支，也别提高自己的消费水平。有些消费水平一旦提高，就很难再降下来，可收入却很容易减少。要做好储蓄，购置一些保值的资产，少做投资。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2>心理分析：为什么聪明人也会上当？</h2>
+            
+            <div class="my-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card p-6">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center">
+                        <i class="fas fa-brain mr-2 text-primary-500"></i>
+                        认知偏差
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>过度自信：成功一次就认为自己无所不能</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>确认偏误：只关注支持自己决定的信息</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>从众心理：看到其他UP主也投资就放松警惕</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="card p-6">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center">
+                        <i class="fas fa-heart mr-2 text-red-500"></i>
+                        情感因素
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>贪婪：对更高回报的不理性追求</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>恐惧：害怕错过"千载难逢"的机会</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>虚荣：想融入"高端"圈子证明自己</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="my-8">
+                <div class="chart-container">
+                    <h3 class="text-lg font-semibold mb-4 text-center">骗局受害者心理变化曲线</h3>
+                    <div class="relative h-64 md:h-80">
+                        <canvas id="psychologyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <h2>如何保护自己的财富？</h2>
+            
+            <div class="my-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card p-6 bg-gradient-to-br from-primary-50 to-blue-50 dark:from-dark-800 dark:to-dark-700">
+                    <h3 class="text-lg font-semibold mb-4 text-primary-700 dark:text-primary-400">
+                        <i class="fas fa-shield-alt mr-2"></i>
+                        防御性措施
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-5 w-5 text-primary-500 mr-2">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <span>任何投资前强制等待24小时冷静期</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-5 w-5 text-primary-500 mr-2">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <span>大额资金转出设置多重验证</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-5 w-5 text-primary-500 mr-2">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <span>建立"不投资清单"：哪些领域绝对不碰</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-5 w-5 text-primary-500 mr-2">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <span>定期与财务顾问或可信赖的朋友讨论重大财务决策</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="card p-6 bg-gradient-to-br from-green-50 to-teal-50 dark:from-dark-800 dark:to-dark-700">
+                    <h3 class="text-lg font-semibold mb-4 text-green-700 dark:text-green-400">
+                        <i class="fas fa-piggy-bank mr-2"></i>
+                        建设性措施
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-5 w-5 text-green-500 mr-2">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <span>建立应急基金(6-12个月生活费)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-5 w-5 text-green-500 mr-2">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <span>多元化收入来源，不只依赖单一平台</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-5 w-5 text-green-500 mr-2">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <span>系统学习财务知识，提高财商</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-5 w-5 text-green-500 mr-2">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <span>将大部分资金配置在低风险资产中</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <blockquote>
+                <p>财富不是你能赚多少钱，而是你能留住多少钱，并让它为你工作。—— 罗伯特·清崎《富爸爸穷爸爸》</p>
+            </blockquote>
+        </article>
+
+        <!-- 进一步阅读 -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 text-primary-700 dark:text-primary-400 border-b pb-2 border-gray-200 dark:border-dark-700">进一步阅读</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card p-6 hover:shadow-md transition-shadow">
+                    <div class="flex items-start">
+                        <div class="w-16 h-20 bg-blue-50 dark:bg-dark-700 flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-book text-blue-500 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">《影响力》</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">罗伯特·西奥迪尼</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">揭示说服与影响力的六大原则，理解为何人们会不理性地顺从。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-6 hover:shadow-md transition-shadow">
+                    <div class="flex items-start">
+                        <div class="w-16 h-20 bg-green-50 dark:bg-dark-700 flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-book text-green-500 dark:text-green-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">《思考，快与慢》</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">丹尼尔·卡尼曼</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">诺贝尔经济学奖得主解析人类思维的两种系统及其认知偏差。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-6 hover:shadow-md transition-shadow">
+                    <div class="flex items-start">
+                        <div class="w-16 h-20 bg-purple-50 dark:bg-dark-700 flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-book text-purple-500 dark:text-purple-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">《随机漫步的傻瓜》</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">纳西姆·塔勒布</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">探讨运气在生活中的作用以及人们如何错误地归因成功。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-6 hover:shadow-md transition-shadow">
+                    <div class="flex items-start">
+                        <div class="w-16 h-20 bg-yellow-50 dark:bg-dark-700 flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-book text-yellow-500 dark:text-yellow-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">《富爸爸穷爸爸》</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">罗伯特·清崎</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">改变传统财富观念，区分资产与负债，建立正确的财务思维。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-6 hover:shadow-md transition-shadow">
+                    <div class="flex items-start">
+                        <div class="w-16 h-20 bg-red-50 dark:bg-dark-700 flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-book text-red-500 dark:text-red-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">《骗局:为什么聪明人容易上当》</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Maria Konnikova</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">心理学视角解析骗局运作机制及为何高智商人群也会中招。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-6 hover:shadow-md transition-shadow">
+                    <div class="flex items-start">
+                        <div class="w-16 h-20 bg-indigo-50 dark:bg-dark-700 flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-book-open text-indigo-500 dark:text-indigo-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">《反脆弱》</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">纳西姆·塔勒布</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">如何在不确定性和混乱中获益，建立抗风险能力。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关键数据图表 -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 text-primary-700 dark:text-primary-400 border-b pb-2 border-gray-200 dark:border-dark-700">数据透视</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="chart-container">
+                    <h3 class="text-lg font-semibold mb-4 text-center">常见骗局类型分布</h3>
+                    <div class="relative h-64">
+                        <canvas id="scamTypeChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <h3 class="text-lg font-semibold mb-4 text-center">受害者年龄与金额关系</h3>
+                    <div class="relative h-64">
+                        <canvas id="ageAmountChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 行动指南 -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 text-primary-700 dark:text-primary-400 border-b pb-2 border-gray-200 dark:border-dark-700">行动指南：如果你突然暴富</h2>
+            <div class="bg-gradient-to-r from-primary-50 to-blue-50 dark:from-dark-800 dark:to-dark-800 rounded-xl p-6 md:p-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-300 mr-4">
+                            <i class="fas fa-1"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-2">冷静期原则</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">任何重大财务决策前强制等待3-6个月，让情绪稳定下来。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-300 mr-4">
+                            <i class="fas fa-2"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-2">专业团队建设</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">聘请独立财务顾问、律师和会计师，建立专业支持网络。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-300 mr-4">
+                            <i class="fas fa-3"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-2">资产配置策略</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">将大部分资金(70%+)配置在低风险资产中，如国债、指数基金。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-300 mr-4">
+                            <i class="fas fa-4"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-2">消费控制</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">第一年保持原有生活方式，避免冲动性大额消费。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-300 mr-4">
+                            <i class="fas fa-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-2">持续教育</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">系统学习财务管理和投资知识，提高财商。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-300 mr-4">
+                            <i class="fas fa-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-2">风险管理</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">任何投资不超过可投资资产的20%，分散风险。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 分享区 -->
+        <section class="mb-12 text-center">
+            <h2 class="text-2xl font-bold mb-6 text-primary-700 dark:text-primary-400">分享这份分析</h2>
+            <p class="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">帮助更多人避免类似陷阱，提高财务安全意识</p>
+            <div class="flex justify-center space-x-4">
+                <a href="#" class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/50 hover:bg-blue-200 dark:hover:bg-blue-800 flex items-center justify-center text-blue-500 dark:text-blue-400 transition-colors">
+                    <i class="fab fa-weixin text-xl"></i>
+                </a>
+                <a href="#" class="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/50 hover:bg-red-200 dark:hover:bg-red-800 flex items-center justify-center text-red-500 dark:text-red-400 transition-colors">
+                    <i class="fab fa-weibo text-xl"></i>
+                </a>
+                <a href="#" class="w-12 h-12 rounded-full bg-blue-500 hover:bg-blue-600 flex items-center justify-center text-white transition-colors">
+                    <i class="fab fa-twitter text-xl"></i>
+                </a>
+                <a href="#" class="w-12 h-12 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-white transition-colors">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+                <a href="#" class="w-12 h-12 rounded-full bg-green-500 hover:bg-green-600 flex items-center justify-center text-white transition-colors">
+                    <i class="fab fa-whatsapp text-xl"></i>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-50 dark:bg-dark-800 border-t border-gray-200 dark:border-dark-700">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-primary-600 dark:text-primary-400">小路洞察</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 text-sm">在职场做副业，优势教练</a></li>
+                        <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 text-sm">帮你解决副业卡点，人生避坑</a></li>
+                        <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 text-sm">探索第二事业曲线</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">快速链接</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://mp.weixin.qq.com/s/rmEHqGeNgRIQ0_Jzqx0jiA" class="text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 text-sm">公众号：小路成长笔记</a></li>
+                        <li><a href="https://mp.weixin.qq.com/s/rmEHqGeNgRIQ0_Jzqx0jiA" class="text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 text-sm">微信：xiaoluv12</a></li>
+                        <li><a href="https://t.zsxq.com/17wTksRxX" class="text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 text-sm">知识星球</a></li>
+                    </ul>
+                </div>
+
+
+                 <div>
+                    <h3 class="text-lg font-semibold mb-4">资源</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://t.zsxq.com/17wTksRxX" class="text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 text-sm">副业实战项目</a></li>
+                        <li><a href="https://t.zsxq.com/17wTksRxX" class="text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 text-sm">个人IP写作指南</a></li>
+                        <li><a href="https://t.zsxq.com/17wTksRxX" class="text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 text-sm">副业避坑手册</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">订阅公众号</h3>
+                   <ul class="space-y-2">
+                        <li><a href="https://t.zsxq.com/17wTksRxX" class="text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 text-sm">领域副业资料包</a></li>
+                        <li><a href="https://t.zsxq.com/17wTksRxX" class="text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 text-sm">进自媒体副业社群</a></li>
+                        <li><a href="https://t.zsxq.com/17wTksRxX" class="text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 text-sm">一起副业赚钱</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            </div>
+            
+            <div class="pt-8 border-t border-gray-200 dark:border-dark-700 flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-6 mb-4 md:mb-0">
+                    <a href="#" class="text-gray-500 hover:text-primary-500 dark:hover:text-primary-400">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-primary-500 dark:hover:text-primary-400">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-primary-500 dark:hover:text-primary-400">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-primary-500 dark:hover:text-primary-400">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                
+                <div class="text-sm text-gray-500 dark:text-gray-400">
+                    <p>© 2023 小路. 保留所有权利.</p>
+                </div>
+            </div>
+
+
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-primary-600 hover:bg-primary-700 text-white shadow-lg flex items-center justify-center transition-all opacity-0 invisible">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- 图表脚本 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // 主题切换
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // 检查本地存储或系统偏好
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+        
+        // 切换主题
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        });
+        
+        // 返回顶部按钮
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 初始化图表
+        document.addEventListener('DOMContentLoaded', function() {
+            // 心理学变化曲线图
+            const psychologyCtx = document.getElementById('psychologyChart').getContext('2d');
+            const psychologyChart = new Chart(psychologyCtx, {
+                type: 'line',
+                data: {
+                    labels: ['暴富初期', '遇见"大哥"', '初步信任', '投资决策', '骗局暴露', '事后反思'],
+                    datasets: [{
+                        label: '自信心水平',
+                        data: [65, 85, 90, 95, 20, 40],
+                        borderColor: '#0ea5e9',
+                        backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }, {
+                        label: '风险感知',
+                        data: [70, 50, 30, 10, 95, 80],
+                        borderColor: '#8b5cf6',
+                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }, {
+                        label: '财务焦虑',
+                        data: [30, 20, 15, 5, 90, 60],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: '程度(0-100)'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 骗局类型分布图
+            const scamTypeCtx = document.getElementById('scamTypeChart').getContext('2d');
+            const scamTypeChart = new Chart(scamTypeCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['投资骗局', '感情骗局', '网络诈骗', '传销', '其他'],
+                    datasets: [{
+                        data: [45, 20, 15, 12, 8],
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.7)',
+                            'rgba(249, 115, 22, 0.7)',
+                            'rgba(234, 179, 8, 0.7)',
+                            'rgba(20, 184, 166, 0.7)',
+                            'rgba(139, 92, 246, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(239, 68, 68, 1)',
+                            'rgba(249, 115, 22, 1)',
+                            'rgba(234, 179, 8, 1)',
+                            'rgba(20, 184, 166, 1)',
+                            'rgba(139, 92, 246, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        },
+                        title: {
+                            display: false,
+                        }
+                    },
+                    cutout: '65%'
+                }
+            });
+            
+            // 年龄与金额关系图
+            const ageAmountCtx = document.getElementById('ageAmountChart').getContext('2d');
+            const ageAmountChart = new Chart(ageAmountCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['18-25岁', '26-30岁', '31-35岁', '36-40岁', '40岁以上'],
+                    datasets: [{
+                        label: '平均被骗金额(万)',
+                        data: [25, 80, 150, 75, 50],
+                        backgroundColor: 'rgba(14, 165, 233, 0.7)',
+                        borderColor: 'rgba(14, 165, 233, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '金额(万元)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+        
+        // 卡片动画
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // 页面加载动画
+        document.body.classList.add('opacity-0');
+        window.addEventListener('load', () => {
+            document.body.classList.remove('opacity-0');
+            document.body.classList.add('transition-opacity', 'duration-500', 'opacity-100');
+            
+            // 元素逐个淡入
+            const animatedElements = document.querySelectorAll('.prose > *');
+            animatedElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('animate-fade-in');
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
