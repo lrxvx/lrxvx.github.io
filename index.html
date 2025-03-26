@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小路的AI小工具博客</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* 定义深色和浅色模式的配色方案 */
+        :root {
+            --color-primary: #1e40af;
+            --color-secondary: #3b82f6;
+            --color-text-light: #333;
+            --color-bg-light: #e0f2fe;
+            --color-text-dark: #fff;
+            --color-bg-dark: #1f2937;
+        }
+
+        /* 跟随系统设置默认模式 */
+        @media (prefers-color-scheme: light) {
+            body {
+                color: var(--color-text-light);
+                background-color: var(--color-bg-light);
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                color: var(--color-text-dark);
+                background-color: var(--color-bg-dark);
+            }
+        }
+
+        /* 浅色模式样式 */
+        body.light-mode {
+            color: var(--color-text-light);
+            background-color: var(--color-bg-light);
+        }
+
+        /* 深色模式样式 */
+        body.dark-mode {
+            color: var(--color-text-dark);
+            background-color: var(--color-bg-dark);
+        }
+
+        /* 导航栏样式 */
+        nav {
+            background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem 4rem;
+        }
+
+        nav a {
+            color: white;
+            font-size: 1.125rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #e5e7eb;
+            transform: scale(1.05);
+        }
+
+        nav button {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            transition: all 0.3s ease;
+        }
+
+        nav button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* 按钮悬停效果 */
+        button:hover {
+            transform: scale(1.05);
+            background-color: var(--color-secondary);
+        }
+
+        /* 卡片样式 */
+        .card {
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        /* 卡片悬停效果 */
+        .card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--color-secondary);
+            transform: translateY(-5px);
+        }
+
+        /* 平滑滚动过渡效果 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 内容区块淡入动画 */
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* 博客标题样式 */    
+        .blog-title {
+            background: url('https://dummyimage.com/1920x600/1e40af/ffffff&text=小路的AI小工具博客') no-repeat center center;
+            background-size: cover;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 0, 0, 0.8);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .blog-title h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* 页脚样式 */
+        footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-intro {
+            margin-bottom: 1rem;
+        }
+
+        .footer-contact {
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+
+<body class="font-sans">
+    <!-- 导航栏 -->
+    <nav class="flex justify-between items-center">
+        <div class="flex space-x-8">
+            <a href="#" class="hover:underline">首页</a>
+            <a href="#" class="hover:underline">工具分类</a>
+            <a href="#" class="hover:underline">关于小路</a>
+        </div>
+        <button id="mode-toggle" class="flex items-center space-x-1">
+            <i class="fa-solid fa-moon"></i>
+            <span>深色模式</span>
+        </button>
+    </nav>
+    <!-- 博客标题 -->
+    <div class="blog-title fade-in">
+        <!-- <h1>小路的AI小工具博客</h1> -->
+    </div>
+    <!-- 主内容区域 -->
+    <main class="p-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <!-- 工具卡片示例 -->
+            <div class="card p-4 border rounded-md fade-in">
+                <i class="fa-solid fa-pencil-ruler text-3xl text-primary mb-2"></i>
+                <h3 class="text-lg font-bold mb-2">社牛指数测评</h3>
+                <p class="text-sm">这是一个测评社交社牛属性的工具。</p>
+                <a href="https://xiaolu-blog.netlify.app/sheniu.html" class="text-primary mt-2 inline-block">了解更多</a>
+            </div>
+            <div class="card p-4 border rounded-md fade-in">
+                <i class="fa-solid fa-language text-3xl text-primary mb-2"></i>
+                <h3 class="text-lg font-bold mb-2">图片切分工具</h3>
+                <p class="text-sm">根据比例大小切分图片</p>
+                <a href="https://xiaolu-blog.netlify.app/imgsplit.html" class="text-primary mt-2 inline-block">了解更多</a>
+            </div>
+        </div>
+    </main>
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-intro">
+            <p>小路介绍：程序员，盖洛普优势教练，副业3年，探索在职场做副业</p>
+        </div>
+        <div class="footer-contact">
+            <p>公众号：<a href="https://mp.weixin.qq.com/s/rmEHqGeNgRIQ0_Jzqx0jiA" target="_blank" class="text-primary">小路成长笔记</a></p>
+            <p>微信：<a href="#" class="text-primary">xiaoluv12</a></p>
+            <p>知识星球：<a href="https://t.zsxq.com/17wTksRxX" class="text-primary" target="_blank">加入知识星球</a></p>
+        </div>
+        <p class="mt-4">&copy; 2025 小路的 AI 小工具博客. 保留所有权利.</p>
+    </footer>
+
+    <script>
+        // 深色/浅色模式切换功能
+        const modeToggle = document.getElementById('mode-toggle');
+        const body = document.body;
+
+        function setMode() {
+            const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+                body.classList.remove('light-mode');
+                modeToggle.innerHTML = '<i class="fa-solid fa-sun"></i> <span>浅色模式</span>';
+            } else {
+                body.classList.add('light-mode');
+                body.classList.remove('dark-mode');
+                modeToggle.innerHTML = '<i class="fa-solid fa-moon"></i> <span>深色模式</span>';
+            }
+        }
+
+        // 初始化模式
+        setMode();
+
+        // 监听系统模式变化
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setMode);
+
+        // 手动切换模式
+        modeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.add('light-mode');
+                body.classList.remove('dark-mode');
+                modeToggle.innerHTML = '<i class="fa-solid fa-moon"></i> <span>深色模式</span>';
+            } else {
+                body.classList.add('dark-mode');
+                body.classList.remove('light-mode');
+                modeToggle.innerHTML = '<i class="fa-solid fa-sun"></i> <span>浅色模式</span>';
+            }
+        });
+    </script>
+</body>
+
+</html>    
