@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>社牛指数测评</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --dark: #292F36;
+            --light: #F7FFF7;
+            --accent: #FFE66D;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .intro {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 80%;
+            margin: 0 auto 20px;
+        }
+        
+        /* Form Sections */
+        .form-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: none;
+        }
+        
+        .form-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Name Input Section */
+        .name-input {
+            text-align: center;
+        }
+        
+        .name-input input {
+            width: 70%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            font-size: 1rem;
+            text-align: center;
+            margin: 20px 0;
+            transition: all 0.3s;
+        }
+        
+        .name-input input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255,107,107,0.2);
+        }
+        
+        /* Question Styling */
+        .question {
+            margin-bottom: 30px;
+        }
+        
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #eee;
+        }
+        
+        .option:hover {
+            background: #e9ecef;
+        }
+        
+        .option.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .option input {
+            margin-right: 10px;
+        }
+        
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255,107,107,0.3);
+        }
+        
+        .btn-secondary {
+            background: #e9ecef;
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            background: #e9ecef;
+            border-radius: 10px;
+            margin: 20px 0;
+            height: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+        
+        .progress-text {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+        
+        /* Results Section */
+        .results {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .result-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .result-score {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .animal {
+            font-size: 5rem;
+            margin: 20px 0;
+        }
+        
+        .result-description {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .user-name {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        /* Share Card */
+        .share-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 500px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .share-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .share-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .share-animal {
+            font-size: 4rem;
+            margin: 15px 0;
+        }
+        
+        .share-text {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .share-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .logo {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .intro {
+                max-width: 100%;
+                font-size: 1rem;
+            }
+            
+            .form-section {
+                padding: 20px;
+            }
+            
+            .question-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>社牛指数测评</h1>
+            <p class="intro">10道题测出你的真实社交属性，看看你是社牛王者还是安静观察者</p>
+        </header>
+        
+        <!-- Name Input Section -->
+        <section id="name-section" class="form-section active">
+            <div class="name-input">
+                <h2>请输入你的名字</h2>
+                <p>我们将根据测评结果生成专属海报</p>
+                <input type="text" id="user-name" placeholder="怎么称呼你呢？" maxlength="10">
+                <div class="nav-buttons">
+                    <button id="start-btn" class="btn btn-primary" disabled>
+                        <i class="fas fa-play"></i> 开始测评
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Questions Section -->
+        <section id="questions-section" class="form-section">
+            <div class="progress-text">第 <span id="current-question">1</span>/10 题</div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            
+            <div id="questions-container">
+                <!-- Current question will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="nav-buttons">
+                <button id="prev-btn" class="btn btn-secondary" disabled>
+                    <i class="fas fa-arrow-left"></i> 上一题
+                </button>
+                <button id="next-btn" class="btn btn-primary">
+                    下一题 <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+        
+        <!-- Results Section -->
+        <section id="results-section" class="form-section">
+            <div class="results">
+                <h2 class="result-title">你的社牛测评结果</h2>
+                <div class="result-score">得分: <span id="score">0</span>/10</div>
+                <div class="animal" id="animal-emoji">🦁</div>
+                <h3 id="animal-title">社牛王者</h3>
+                <div class="result-description" id="animal-description">
+                    "你是人群中的太阳，走到哪里都是焦点！天生的社交领袖，建议直接出道当'人类联结师'。"
+                </div>
+                
+                <div class="share-card" id="share-card">
+                    <h3 class="share-title">社牛测评证书</h3>
+                    <div class="share-animal" id="share-animal">🦁</div>
+                    <h4 id="share-title">社牛王者</h4>
+                    <p class="share-text" id="share-text">
+                        <span id="share-name">XXX</span>在社牛测评中获得了<span id="share-score">10</span>分！
+                        "你是人群中的太阳，走到哪里都是焦点！"
+                    </p>
+                    <div class="share-footer">
+                        <div class="logo">社牛指数测评</div>
+                        <div id="share-date">2024年X月X日</div>
+                    </div>
+                </div>
+                
+                <button id="restart-btn" class="btn btn-secondary">
+                    <i class="fas fa-redo"></i> 重新测评
+                </button>
+                <button id="share-btn" class="btn btn-primary">
+                    <i class="fas fa-download"></i> 下载海报
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Questions data
+            const questions = [
+                {
+                    question: "陌生人向你搭话时，你会主动聊下去吗？",
+                    options: [
+                        { text: "会，甚至能聊成朋友", score: 1 },
+                        { text: "简单回应，但不会深入", score: 0.5 },
+                        { text: "快速结束对话", score: 0 }
+                    ]
+                },
+                {
+                    question: "在聚会上，你通常是？",
+                    options: [
+                        { text: "主动破冰，带动全场气氛", score: 1 },
+                        { text: "和熟人聊天，偶尔加入新话题", score: 0.5 },
+                        { text: "默默观察，尽量不引人注意", score: 0 }
+                    ]
+                },
+                {
+                    question: "遇到尴尬冷场，你会？",
+                    options: [
+                        { text: "立刻抛梗或发起新话题", score: 1 },
+                        { text: "等别人开口，再附和一下", score: 0.5 },
+                        { text: "假装没发现，低头玩手机", score: 0 }
+                    ]
+                },
+                {
+                    question: "朋友约你参加全是陌生人的活动，你会？",
+                    options: [
+                        { text: "兴奋答应，期待认识新朋友", score: 1 },
+                        { text: "犹豫后参加，但只跟着朋友", score: 0.5 },
+                        { text: "找借口拒绝", score: 0 }
+                    ]
+                },
+                {
+                    question: "微信添加新好友后，你会？",
+                    options: [
+                        { text: "主动发消息介绍自己", score: 1 },
+                        { text: "等对方先打招呼", score: 0.5 },
+                        { text: "从不主动联系", score: 0 }
+                    ]
+                },
+                {
+                    question: "看到同事/同学在讨论话题，你会？",
+                    options: [
+                        { text: "直接加入并贡献观点", score: 1 },
+                        { text: "先旁听，再找机会插话", score: 0.5 },
+                        { text: "默默走开", score: 0 }
+                    ]
+                },
+                {
+                    question: "在电梯里遇到邻居/同事，你会？",
+                    options: [
+                        { text: "主动微笑打招呼并闲聊", score: 1 },
+                        { text: "点头示意，但不说话", score: 0.5 },
+                        { text: "假装刷手机", score: 0 }
+                    ]
+                },
+                {
+                    question: "需要向陌生人求助时，你会？",
+                    options: [
+                        { text: "毫不犹豫上前询问", score: 1 },
+                        { text: "先观察对方是否友好再开口", score: 0.5 },
+                        { text: "宁愿自己想办法", score: 0 }
+                    ]
+                },
+                {
+                    question: "朋友对你的第一印象通常是？",
+                    options: [
+                        { text: "“自来熟”“热情”", score: 1 },
+                        { text: "“温和但有点慢热”", score: 0.5 },
+                        { text: "“高冷”“话少”", score: 0 }
+                    ]
+                },
+                {
+                    question: "你如何发起一次聚会？",
+                    options: [
+                        { text: "直接拉群喊人，敲定时间地点", score: 1 },
+                        { text: "私下问几个人，再决定是否组织", score: 0.5 },
+                        { text: "从不主动发起，只等别人邀请", score: 0 }
+                    ]
+                }
+            ];
+            
+            // Results data
+            const results = [
+                {
+                    minScore: 9,
+                    title: "社牛王者",
+                    emoji: "🦁",
+                    description: "“你是人群中的太阳，走到哪里都是焦点！天生的社交领袖，建议直接出道当'人类联结师'。”"
+                },
+                {
+                    minScore: 7,
+                    title: "社交达人",
+                    emoji: "🐬",
+                    description: "“进退自如的控场高手，既热情又有分寸，和你相处如沐春风～”"
+                },
+                {
+                    minScore: 5,
+                    title: "均衡型选手",
+                    emoji: "🦊",
+                    description: "“可盐可甜，静若处子动若脱兔！需要时能活跃气氛，但也享受独处时光。”"
+                },
+                {
+                    minScore: 3,
+                    title: "安静观察者",
+                    emoji: "🦥",
+                    description: "“比起主动社交，你更擅长洞察人心。虽然慢热，但每个朋友都走心！”"
+                },
+                {
+                    minScore: 0,
+                    title: "社恐星人",
+                    emoji: "🦔",
+                    description: "“社交？不如回家撸猫！但偶尔探出小爪子，也能收获意外惊喜～”"
+                }
+            ];
+            
+            // DOM Elements
+            const nameSection = document.getElementById('name-section');
+            const questionsSection = document.getElementById('questions-section');
+            const resultsSection = document.getElementById('results-section');
+            const userNameInput = document.getElementById('user-name');
+            const startBtn = document.getElementById('start-btn');
+            const questionsContainer = document.getElementById('questions-container');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const currentQuestionSpan = document.getElementById('current-question');
+            const progressBar = document.getElementById('progress-bar');
+            const restartBtn = document.getElementById('restart-btn');
+            const shareBtn = document.getElementById('share-btn');
+            const scoreSpan = document.getElementById('score');
+            const animalEmoji = document.getElementById('animal-emoji');
+            const animalTitle = document.getElementById('animal-title');
+            const animalDescription = document.getElementById('animal-description');
+            const shareCard = document.getElementById('share-card');
+            const shareAnimal = document.getElementById('share-animal');
+            const shareTitle = document.getElementById('share-title');
+            const shareName = document.getElementById('share-name');
+            const shareScore = document.getElementById('share-score');
+            const shareText = document.getElementById('share-text');
+            const shareDate = document.getElementById('share-date');
+            
+            // State variables
+            let currentQuestionIndex = 0;
+            let answers = Array(questions.length).fill(null);
+            let userName = '';
+            
+            // Render current question only
+            function renderCurrentQuestion() {
+                questionsContainer.innerHTML = '';
+                
+                const q = questions[currentQuestionIndex];
+                
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question active';
+                
+                const questionText = document.createElement('div');
+                questionText.className = 'question-text';
+                questionText.textContent = q.question;
+                
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                
+                q.options.forEach((option, optionIndex) => {
+                    const optionDiv = document.createElement('label');
+                    optionDiv.className = `option ${answers[currentQuestionIndex] === optionIndex ? 'selected' : ''}`;
+                    
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = `question-${currentQuestionIndex}`;
+                    input.value = optionIndex;
+                    if (answers[currentQuestionIndex] === optionIndex) {
+                        input.checked = true;
+                    }
+                    
+                    input.addEventListener('change', () => {
+                        answers[currentQuestionIndex] = optionIndex;
+                        document.querySelectorAll('.question .option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        optionDiv.classList.add('selected');
+                        updateNavigation();
+                    });
+                    
+                    const optionText = document.createElement('span');
+                    optionText.textContent = option.text;
+                    
+                    optionDiv.appendChild(input);
+                    optionDiv.appendChild(optionText);
+                    optionsDiv.appendChild(optionDiv);
+                });
+                
+                questionDiv.appendChild(questionText);
+                questionDiv.appendChild(optionsDiv);
+                questionsContainer.appendChild(questionDiv);
+                
+                updateProgress();
+                updateNavigation();
+            }
+            
+            // Update progress bar and question counter
+            function updateProgress() {
+                const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+                progressBar.style.width = `${progress}%`;
+                currentQuestionSpan.textContent = currentQuestionIndex + 1;
+            }
+            
+            // Update navigation buttons state
+            function updateNavigation() {
+                prevBtn.disabled = currentQuestionIndex === 0;
+                nextBtn.disabled = answers[currentQuestionIndex] === null;
+                
+                if (currentQuestionIndex === questions.length - 1 && answers[currentQuestionIndex] !== null) {
+                    nextBtn.innerHTML = '查看结果 <i class="fas fa-chart-bar"></i>';
+                } else {
+                    nextBtn.innerHTML = '下一题 <i class="fas fa-arrow-right"></i>';
+                }
+            }
+            
+            // Calculate score and show results
+            function showResults() {
+                let totalScore = 0;
+                
+                answers.forEach((answerIndex, questionIndex) => {
+                    if (answerIndex !== null) {
+                        totalScore += questions[questionIndex].options[answerIndex].score;
+                    }
+                });
+                
+                // Round to 1 decimal place
+                totalScore = Math.round(totalScore * 10) / 10;
+                
+                // Find matching result
+                const result = results.find(r => totalScore >= r.minScore) || results[results.length - 1];
+                
+                // Update results UI
+                scoreSpan.textContent = totalScore;
+                animalEmoji.textContent = result.emoji;
+                animalTitle.textContent = result.title;
+                animalDescription.textContent = result.description;
+                
+                // Update share card
+                shareAnimal.textContent = result.emoji;
+                shareTitle.textContent = result.title;
+                shareName.textContent = userName;
+                shareScore.textContent = totalScore;
+                shareText.innerHTML = `<span class="user-name">${userName}</span>在社牛测评中获得了<span class="user-name">${totalScore}</span>分！${result.description}`;
+                
+                // Set current date
+                const now = new Date();
+                shareDate.textContent = `${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日`;
+                
+                // Show results section
+                nameSection.classList.remove('active');
+                questionsSection.classList.remove('active');
+                resultsSection.classList.add('active');
+            }
+            
+            // Event Listeners
+            userNameInput.addEventListener('input', function() {
+                startBtn.disabled = this.value.trim() === '';
+                userName = this.value.trim();
+            });
+            
+            startBtn.addEventListener('click', function() {
+                nameSection.classList.remove('active');
+                questionsSection.classList.add('active');
+                renderCurrentQuestion();
+            });
+            
+            prevBtn.addEventListener('click', function() {
+                if (currentQuestionIndex > 0) {
+                    currentQuestionIndex--;
+                    renderCurrentQuestion();
+                }
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                if (currentQuestionIndex < questions.length - 1) {
+                    currentQuestionIndex++;
+                    renderCurrentQuestion();
+                } else {
+                    showResults();
+                }
+            });
+            
+            restartBtn.addEventListener('click', function() {
+                currentQuestionIndex = 0;
+                answers = Array(questions.length).fill(null);
+                userNameInput.value = '';
+                startBtn.disabled = true;
+                
+                resultsSection.classList.remove('active');
+                nameSection.classList.add('active');
+            });
+            
+            shareBtn.addEventListener('click', function() {
+                html2canvas(shareCard, {
+                    scale: 2,
+                    logging: false,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: null
+                }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = `社牛测评-${userName}.png`;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                });
+            });
+            
+            // Initialize
+            updateNavigation();
+        });
+    </script>
+</body>
+</html>
