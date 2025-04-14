@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>副业测评诊断问卷</title>
+    <!-- 引入html2canvas库用于生成图片 -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            color: #4a6bdf;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: #4a6bdf;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .question-section {
+            display: block;
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .question:last-child {
+            border-bottom: none;
+        }
+        
+        .question h3 {
+            margin-top: 0;
+            color: #444;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .option:hover {
+            background-color: #e9f0ff;
+        }
+        
+        .option.selected {
+            background-color: #e1e8ff;
+            border-left: 4px solid #4a6bdf;
+        }
+        
+        .option input {
+            margin-right: 10px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        button {
+            background-color: #4a6bdf;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #3a5bd9;
+        }
+        
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .result-section {
+            display: none;
+            padding: 20px;
+        }
+        
+        .result-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .result-card h3 {
+            color: #4a6bdf;
+            margin-top: 0;
+        }
+        
+        .recommendation {
+            background-color: #e1e8ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a6bdf;
+        }
+        
+        .download-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .download-image {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        
+        .download-resource {
+            background-color: #4ecdc4;
+            color: white;
+        }
+        
+        .follow-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .follow-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .follow-link {
+            padding: 10px 15px;
+            background-color: #4a6bdf;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .option {
+                padding: 10px;
+            }
+            
+            .follow-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>副业测评诊断问卷</h1>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        
+        <form id="survey-form">
+            <!-- 问题1 -->
+            <div class="question-section" id="q1">
+                <div class="question">
+                    <h3>1. 你目前每天能投入副业的时间大约是？</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q1" value="1"> 1小时以内
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="2"> 1-2小时
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="3"> 2-3小时
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="4"> 3小时以上
+                        </label>
+                    </div>
+                </div>
+                <div class="nav-buttons">
+                    <button type="button" disabled>上一题</button>
+                    <button type="button" onclick="nextQuestion('q1', 'q2')">下一题</button>
+                </div>
+            </div>
+            
+            <!-- 问题2 -->
+            <div class="question-section" id="q2" style="display:none;">
+                <div class="question">
+                    <h3>2. 你希望从副业中获得的主要收益是？</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q2" value="1"> 每月500-1000元额外收入
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="2"> 每月1000-3000元额外收入
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="3"> 每月3000-5000元额外收入
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="4"> 每月5000元以上额外收入
+                        </label>
+                    </div>
+                </div>
+                <div class="nav-buttons">
+                    <button type="button" onclick="prevQuestion('q2', 'q1')">上一题</button>
+                    <button type="button" onclick="nextQuestion('q2', 'q3')">下一题</button>
+                </div>
+            </div>
+            
+            <!-- 问题3 -->
+            <div class="question-section" id="q3" style="display:none;">
+                <div class="question">
+                    <h3>3. 你目前拥有的技能或特长是？（可多选）</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="checkbox" name="q3" value="writing"> 写作/文案
+                        </label>
+                        <label class="option">
+                            <input type="checkbox" name="q3" value="design"> 设计/创意
+                        </label>
+                        <label class="option">
+                            <input type="checkbox" name="q3" value="tech"> 编程/技术
+                        </label>
+                        <label class="option">
+                            <input type="checkbox" name="q3" value="language"> 外语能力
+                        </label>
+                        <label class="option">
+                            <input type="checkbox" name="q3" value="video"> 视频剪辑/拍摄
+                        </label>
+                        <label class="option">
+                            <input type="checkbox" name="q3" value="none"> 没有特别突出的技能
+                        </label>
+                    </div>
+                </div>
+                <div class="nav-buttons">
+                    <button type="button" onclick="prevQuestion('q3', 'q2')">上一题</button>
+                    <button type="button" onclick="nextQuestion('q3', 'q4')">下一题</button>
+                </div>
+            </div>
+            
+            <!-- 问题4 -->
+            <div class="question-section" id="q4" style="display:none;">
+                <div class="question">
+                    <h3>4. 你对以下哪些副业领域感兴趣？</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="checkbox" name="q4" value="online"> 线上工作（如自由职业、远程办公）
+                        </label>
+                        <label class="option">
+                            <input type="checkbox" name="q4" value="offline"> 线下工作（如摆摊、兼职）
+                        </label>
+                        <label class="option">
+                            <input type="checkbox" name="q4" value="content"> 内容创作（如自媒体、短视频）
+                        </label>
+                        <label class="option">
+                            <input type="checkbox" name="q4" value="ecommerce"> 电商/销售（如淘宝、闲鱼）
+                        </label>
+                        <label class="option">
+                            <input type="checkbox" name="q4" value="service"> 服务类（如咨询、家教）
+                        </label>
+                    </div>
+                </div>
+                <div class="nav-buttons">
+                    <button type="button" onclick="prevQuestion('q4', 'q3')">上一题</button>
+                    <button type="button" onclick="nextQuestion('q4', 'q5')">下一题</button>
+                </div>
+            </div>
+            
+            <!-- 问题5 -->
+            <div class="question-section" id="q5" style="display:none;">
+                <div class="question">
+                    <h3>5. 你预计能坚持做副业多长时间？</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q5" value="1"> 3个月以内（短期尝试）
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q5" value="2"> 3-6个月
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q5" value="3"> 6-12个月
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q5" value="4"> 1年以上（长期发展）
+                        </label>
+                    </div>
+                </div>
+                <div class="nav-buttons">
+                    <button type="button" onclick="prevQuestion('q5', 'q4')">上一题</button>
+                    <button type="button" onclick="nextQuestion('q5', 'q6')">下一题</button>
+                </div>
+            </div>
+            
+            <!-- 问题6 -->
+            <div class="question-section" id="q6" style="display:none;">
+                <div class="question">
+                    <h3>6. 你认为自己在副业中可能遇到的最大困难是？</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="checkbox" name="q6" value="time"> 时间管理困难
+                        </label>
+                        <label class="option">
+                            <input type="checkbox" name="q6" value="skill"> 技能不足
+                        </label>
+                        <label class="option">
+                            <input type="checkbox" name="q6" value="persist"> 难以坚持
+                        </label>
+                        <label class="option">
+                            <input type="checkbox" name="q6" value="client"> 找不到客户/流量
+                        </label>
+                        <label class="option">
+                            <input type="checkbox" name="q6" value="money"> 启动资金不足
+                        </label>
+                    </div>
+                </div>
+                <div class="nav-buttons">
+                    <button type="button" onclick="prevQuestion('q6', 'q5')">上一题</button>
+                    <button type="button" onclick="calculateResults()">查看结果</button>
+                </div>
+            </div>
+        </form>
+        
+        <div class="result-section" id="result">
+            <h2>你的副业测评结果</h2>
+            
+            <div class="result-card" id="result-content">
+                <h3>综合得分</h3>
+                <p>你的副业准备度评分为：<span class="score" id="total-score">0</span>/100</p>
+                <div id="score-description"></div>
+            </div>
+            
+            <div class="result-card">
+                <h3>潜在问题分析</h3>
+                <div id="problems-list"></div>
+            </div>
+            
+            <div class="result-card">
+                <h3>适合你的副业推荐</h3>
+                <div id="recommendations"></div>
+            </div>
+            
+            <div class="result-card">
+                <h3>时间投入建议</h3>
+                <div id="time-suggestion"></div>
+            </div>
+            
+            <div class="recommendation">
+                <h3>下一步行动建议</h3>
+                <div id="action-steps"></div>
+            </div>
+            
+            <!-- 下载区域 -->
+            <div class="download-section">
+                <a href="#" class="download-btn download-image" onclick="downloadResultAsImage()">
+                    <span>📸 保存测评结果为图片</span>
+                </a>
+                <a href="https://pan.quark.cn/s/0d3b86eeda24" target="_blank" class="download-btn download-resource">
+                    <span>📚 下载副业资料包（含自媒体运营、电商等干货）</span>
+                </a>
+            </div>
+            
+            <!-- 关注引导区域 -->
+            <div class="follow-section">
+                <h3>获取更多副业干货</h3>
+                <p>关注我的公众号和知识星球，获取更多副业赚钱技巧和实操案例</p>
+                <div class="follow-links">
+                    <a href="https://mp.weixin.qq.com/s/rmEHqGeNgRIQ0_Jzqx0jiA" target="_blank" class="follow-link">关注公众号：小路成长笔记</a>
+                    <a href="https://t.zsxq.com/17wTksRxX" target="_blank" class="follow-link">加入知识星球</a>
+                </div>
+            </div>
+            
+            <button type="button" onclick="restartSurvey()" style="width:100%; margin-top:20px;">重新测试</button>
+        </div>
+    </div>
+
+    <script>
+        // 更新进度条
+        function updateProgress(current, total) {
+            const progress = (current / total) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+        
+        // 下一题
+        function nextQuestion(currentId, nextId) {
+            document.getElementById(currentId).style.display = 'none';
+            document.getElementById(nextId).style.display = 'block';
+            
+            const currentQuestion = parseInt(currentId.replace('q', ''));
+            updateProgress(currentQuestion, 6);
+        }
+        
+        // 上一题
+        function prevQuestion(currentId, prevId) {
+            document.getElementById(currentId).style.display = 'none';
+            document.getElementById(prevId).style.display = 'block';
+            
+            const currentQuestion = parseInt(currentId.replace('q', ''));
+            updateProgress(currentQuestion - 2, 6);
+        }
+        
+        // 选中选项样式
+        document.querySelectorAll('.option input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                // 移除所有选中样式
+                document.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                // 添加当前选中样式
+                if (this.checked) {
+                    this.parentElement.classList.add('selected');
+                }
+            });
+        });
+        
+        // 计算结果
+        function calculateResults() {
+            // 隐藏问卷，显示结果
+            document.getElementById('survey-form').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+            updateProgress(6, 6);
+            
+            // 获取所有答案
+            const q1 = parseInt(document.querySelector('input[name="q1"]:checked')?.value || 1);
+            const q2 = parseInt(document.querySelector('input[name="q2"]:checked')?.value || 1);
+            const q3 = Array.from(document.querySelectorAll('input[name="q3"]:checked')).map(el => el.value);
+            const q4 = Array.from(document.querySelectorAll('input[name="q4"]:checked')).map(el => el.value);
+            const q5 = parseInt(document.querySelector('input[name="q5"]:checked')?.value || 1);
+            const q6 = Array.from(document.querySelectorAll('input[name="q6"]:checked')).map(el => el.value);
+            
+            // 计算总分（简单示例，实际可根据业务逻辑调整）
+            let totalScore = (q1 + q2 + q5) * 5;
+            if (q3.length > 0) totalScore += q3.length * 5;
+            if (q4.length > 0) totalScore += q4.length * 5;
+            
+            // 限制最高分100
+            totalScore = Math.min(totalScore, 100);
+            
+            // 显示总分
+            document.getElementById('total-score').textContent = totalScore;
+            
+            // 评分描述
+            let scoreDescription = '';
+            if (totalScore >= 80) {
+                scoreDescription = '你的副业准备度很高！你有明确的目标、足够的时间和相关技能，非常适合开始副业。';
+            } else if (totalScore >= 60) {
+                scoreDescription = '你的副业准备度中等。你有一定的条件和意愿，但还需要解决一些问题。';
+            } else {
+                scoreDescription = '你的副业准备度较低。建议先解决时间、技能或动力问题，再考虑副业。';
+            }
+            document.getElementById('score-description').innerHTML = `<p>${scoreDescription}</p>`;
+            
+            // 潜在问题分析
+            let problemsHtml = '<ul>';
+            if (q6.includes('time')) {
+                problemsHtml += '<li>⏰ <strong>时间管理困难</strong>：你可能需要更合理地安排时间，或选择更灵活的副业</li>';
+            }
+            if (q6.includes('skill')) {
+                problemsHtml += '<li>📚 <strong>技能不足</strong>：建议先学习相关技能或选择门槛较低的副业</li>';
+            }
+            if (q6.includes('persist')) {
+                problemsHtml += '<li>💪 <strong>难以坚持</strong>：选择你感兴趣的领域，或找人监督鼓励</li>';
+            }
+            if (q6.includes('client')) {
+                problemsHtml += '<li>👥 <strong>获客困难</strong>：学习营销技巧，利用社交媒体扩大影响力</li>';
+            }
+            if (q6.includes('money')) {
+                problemsHtml += '<li>💰 <strong>资金不足</strong>：选择零成本或低成本的副业开始</li>';
+            }
+            problemsHtml += '</ul>';
+            document.getElementById('problems-list').innerHTML = problemsHtml;
+            
+            // 副业推荐
+            let recommendationsHtml = '<p>根据你的兴趣和技能，以下副业可能适合你：</p><ul>';
+            
+            // 根据兴趣领域推荐
+            if (q4.includes('online')) {
+                recommendationsHtml += '<li>💻 <strong>自由职业</strong>：在Upwork、猪八戒等平台接单（写作、设计、编程等）</li>';
+            }
+            if (q4.includes('content')) {
+                recommendationsHtml += '<li>🎥 <strong>自媒体</strong>：运营小红书、抖音、B站等平台，分享你的专长</li>';
+            }
+            if (q4.includes('ecommerce')) {
+                recommendationsHtml += '<li>🛒 <strong>无货源电商</strong>：在闲鱼、拼多多等平台做一件代发</li>';
+            }
+            if (q4.includes('service')) {
+                recommendationsHtml += '<li>👔 <strong>咨询服务</strong>：提供你擅长的领域的付费咨询（如职业规划、留学申请）</li>';
+            }
+            if (q4.includes('offline')) {
+                recommendationsHtml += '<li>🍔 <strong>周末摆摊</strong>：夜市、市集摆摊卖小吃或小商品</li>';
+            }
+            
+            // 根据技能推荐
+            if (q3.includes('writing')) {
+                recommendationsHtml += '<li>✍️ <strong>文案写作</strong>：为企业写公众号文章、产品描述</li>';
+            }
+            if (q3.includes('design')) {
+                recommendationsHtml += '<li>🎨 <strong>平面设计</strong>：做LOGO、海报设计（可接单平台：千图网）</li>';
+            }
+            if (q3.includes('tech')) {
+                recommendationsHtml += '<li>👨‍💻 <strong>编程外包</strong>：接小型网站或小程序开发项目</li>';
+            }
+            if (q3.includes('video')) {
+                recommendationsHtml += '<li>🎬 <strong>视频剪辑</strong>：为商家剪辑宣传视频或Vlog</li>';
+            }
+            if (q3.includes('none') || q3.length === 0) {
+                recommendationsHtml += '<li>🛠️ <strong>低门槛副业</strong>：问卷调查、APP试玩、数据标注等</li>';
+            }
+            
+            recommendationsHtml += '</ul>';
+            document.getElementById('recommendations').innerHTML = recommendationsHtml;
+            
+            // 时间投入建议
+            let timeHtml = '<p>根据你每天可投入的时间：</p><ul>';
+            if (q1 == 1) {
+                timeHtml += '<li>你每天只有<strong>1小时以内</strong>，建议选择碎片化可操作的副业，如问卷调查、自媒体简单内容创作</li>';
+            } else if (q1 == 2) {
+                timeHtml += '<li>你每天有<strong>1-2小时</strong>，可以尝试自由职业接单、短视频剪辑等需要一定时间投入的副业</li>';
+            } else if (q1 == 3) {
+                timeHtml += '<li>你每天有<strong>2-3小时</strong>，可以发展需要持续投入的副业，如自媒体运营、电商店铺管理</li>';
+            } else {
+                timeHtml += '<li>你每天有<strong>3小时以上</strong>，完全可以像经营小生意一样发展副业，如自由职业、线下小生意</li>';
+            }
+            timeHtml += '</ul>';
+            document.getElementById('time-suggestion').innerHTML = timeHtml;
+            
+            // 行动建议
+            let actionsHtml = '<ol>';
+            actionsHtml += '<li><strong>选择1-2个最适合的副业方向</strong>（参考上方推荐）</li>';
+            actionsHtml += '<li><strong>制定3个月计划</strong>：设定每周小目标，如"第一周完成账号注册，第二周发布3条内容"</li>';
+            actionsHtml += '<li><strong>每天固定时间执行</strong>：将副业时间纳入日程表，像工作一样对待</li>';
+            actionsHtml += '<li><strong>持续学习和优化</strong>：关注行业动态，不断改进你的副业策略</li>';
+            actionsHtml += '</ol>';
+            document.getElementById('action-steps').innerHTML = actionsHtml;
+        }
+        
+        // 重新开始问卷
+        function restartSurvey() {
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('survey-form').style.display = 'block';
+            document.getElementById('q1').style.display = 'block';
+            document.getElementById('progress').style.width = '0%';
+            
+            // 重置表单
+            document.getElementById('survey-form').reset();
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+        }
+        
+        // 将结果保存为图片
+        function downloadResultAsImage() {
+            // 临时隐藏不需要的元素
+            const downloadBtn = document.querySelector('.download-section');
+            const followSection = document.querySelector('.follow-section');
+            const restartBtn = document.querySelector('button[onclick="restartSurvey()"]');
+            
+            downloadBtn.style.display = 'none';
+            followSection.style.display = 'none';
+            restartBtn.style.display = 'none';
+            
+            // 使用html2canvas生成图片
+            html2canvas(document.getElementById('result-content'), {
+                scale: 2, // 提高分辨率
+                logging: false,
+                useCORS: true,
+                allowTaint: true
+            }).then(canvas => {
+                // 恢复隐藏的元素
+                downloadBtn.style.display = 'flex';
+                followSection.style.display = 'block';
+                restartBtn.style.display = 'block';
+                
+                // 创建下载链接
+                const link = document.createElement('a');
+                link.download = '副业测评结果.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+    </script>
+</body>
+</html>
