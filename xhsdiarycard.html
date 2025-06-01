@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小红书日记卡片生成器 - 带日期版本</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF2E4D;
+            --primary-light: #FF5C77;
+            --secondary: #6BD6FF;
+            --bg-gradient: linear-gradient(135deg, #FFEDF0 0%, #F0F9FF 100%);
+            --card-shadow: 0 12px 24px -6px rgba(255, 46, 77, 0.15);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: #fafafa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        h1 {
+            color: var(--primary);
+            margin-bottom: 24px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 28px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        h1::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+        
+        .input-area {
+            width: 100%;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .input-area label {
+            display: block;
+            margin-bottom: 8px;
+            color: #666;
+            font-weight: 500;
+            font-size: 15px;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 180px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 15px;
+            resize: vertical;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 2px 12px rgba(255, 46, 77, 0.15);
+        }
+        
+        .example-text {
+            font-size: 13px;
+            color: #999;
+            margin-top: 8px;
+            padding-left: 5px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+        
+        button {
+            padding: 12px 24px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(255, 46, 77, 0.25);
+        }
+        
+        button:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 46, 77, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .card-container {
+            position: relative;
+            width: 100%;
+            padding-top: 133.33%; /* 3:4 比例 */
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .card-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-gradient);
+            overflow: hidden;
+        }
+        
+        /* 装饰元素 */
+        .decor-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+        
+        .circle-1 {
+            width: 120px;
+            height: 120px;
+            background: var(--primary);
+            top: -30px;
+            right: -30px;
+        }
+        
+        .circle-2 {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary);
+            bottom: 20px;
+            left: -20px;
+        }
+        
+        .decor-line {
+            position: absolute;
+            height: 2px;
+            background: var(--primary);
+            opacity: 0.15;
+            transform: rotate(-45deg);
+        }
+        
+        .line-1 {
+            width: 150px;
+            top: 40%;
+            left: -50px;
+        }
+        
+        .line-2 {
+            width: 100px;
+            bottom: 30%;
+            right: -30px;
+        }
+        
+        .header {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* 新增日期样式 */
+        .date-info {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+        }
+        
+        .date-info::before {
+            content: "📅";
+            margin-right: 8px;
+            font-size: 14px;
+        }
+        
+        .keywords {
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+        }
+        
+        .keywords::before {
+            content: "✨";
+            margin-right: 8px;
+            font-size: 16px;
+        }
+        
+        .tasks {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .task-item {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            line-height: 1.5;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 12px 15px;
+            border-radius: 12px;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s;
+        }
+        
+        .task-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .task-number {
+            font-weight: bold;
+            margin-right: 10px;
+            color: var(--primary);
+            min-width: 22px;
+            display: inline-block;
+        }
+        
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin-top: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 600px) {
+            .header {
+                font-size: 20px;
+            }
+            
+            .date-info {
+                font-size: 14px;
+            }
+            
+            .keywords {
+                font-size: 16px;
+            }
+            
+            .task-item {
+                font-size: 15px;
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>小红书日记卡片生成器</h1>
+        
+        <div class="input-area">
+            <label for="diary-input">输入日记内容：</label>
+            <textarea id="diary-input" placeholder="请输入日记内容，格式如下：
+小路的一人企业日记第23天：星球抽奖，AI工作流提示词
+
+2025/5/31，周六，在职场做副业
+
+1、6月星球抽奖开启，这次换微信群抽奖
+
+2、小红书养号，刷AI编程，知识库的内容，关注收藏一些博主和帖子
+
+3、提前把明天的文章准备好
+
+4、刷两节小红书短视频课内容
+
+5、用扣子做小红书日记图，调整提示词"></textarea>
+            <p class="example-text">示例格式：第一行标题和关键词，空一行后日期信息，再空一行后是任务项</p>
+        </div>
+        
+        <div class="button-group">
+            <button id="generate-btn">
+                <i class="fas fa-magic"></i> 生成卡片
+            </button>
+            <button id="download-btn">
+                <i class="fas fa-download"></i> 下载卡片
+            </button>
+        </div>
+        
+        <div class="card-container" id="card">
+            <div class="card-content">
+                <!-- 装饰元素 -->
+                <div class="decor-circle circle-1"></div>
+                <div class="decor-circle circle-2"></div>
+                <div class="decor-line line-1"></div>
+                <div class="decor-line line-2"></div>
+                
+                <!-- 卡片内容 -->
+                <div class="header">小路的一人企业日记第X天</div>
+                <div class="date-info">日期信息将显示在这里</div>
+                <div class="keywords">关键词将显示在这里</div>
+                <div class="tasks">
+                    <div class="task-item"><span class="task-number">1.</span>任务内容将显示在这里</div>
+                    <div class="task-item"><span class="task-number">2.</span>请输入内容后点击"生成卡片"</div>
+                    <div class="task-item"><span class="task-number">3.</span>然后可以点击"下载卡片"保存</div>
+                </div>
+                <div class="footer">Generated by 小红书日记卡片工具</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('generate-btn').addEventListener('click', function() {
+            const inputText = document.getElementById('diary-input').value.trim();
+            if (!inputText) {
+                alert('请输入日记内容');
+                return;
+            }
+            
+            // 解析输入文本
+            const lines = inputText.split('\n').filter(line => line.trim());
+            if (lines.length < 3) {
+                alert('请输入完整内容，包括标题、日期和至少一个任务');
+                return;
+            }
+            
+            // 解析标题和关键词
+            const titleLine = lines[0];
+            const colonIndex = titleLine.indexOf('：');
+            let title, keywords;
+            
+            if (colonIndex > -1) {
+                title = titleLine.substring(0, colonIndex);
+                keywords = titleLine.substring(colonIndex + 1);
+            } else {
+                title = titleLine;
+                keywords = '';
+            }
+            
+            // 解析日期信息（假设日期在第二行）
+            let dateInfo = '';
+            if (lines.length >= 2) {
+                dateInfo = lines[1];
+            }
+            
+            // 解析任务项（从第三行开始）
+            const tasks = [];
+            for (let i = 2; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (line) {
+                    // 移除任务编号前的可能空格和特殊字符
+                    const taskText = line.replace(/^[0-9、. ]+/, '').trim();
+                    if (taskText) {
+                        tasks.push(taskText);
+                    }
+                }
+            }
+            
+            // 更新卡片内容
+            document.querySelector('#card .header').textContent = title;
+            document.querySelector('#card .date-info').textContent = dateInfo || '未设置日期';
+            document.querySelector('#card .keywords').textContent = keywords || '今日关键词';
+            
+            const tasksContainer = document.querySelector('#card .tasks');
+            tasksContainer.innerHTML = '';
+            
+            tasks.forEach((task, index) => {
+                const taskItem = document.createElement('div');
+                taskItem.className = 'task-item';
+                taskItem.innerHTML = `<span class="task-number">${index + 1}.</span>${task}`;
+                tasksContainer.appendChild(taskItem);
+            });
+        });
+        
+        document.getElementById('download-btn').addEventListener('click', function() {
+            const card = document.getElementById('card');
+            
+            // 使用html2canvas库来捕获卡片为图片
+            // 在实际使用中，你需要引入html2canvas库
+            // 这里是一个模拟实现，实际使用时需要取消注释下面的代码
+            
+            // alert('下载功能需要引入html2canvas库。\n\n在实际应用中，请取消注释代码中的html2canvas部分。');
+            
+            
+            // 实际使用时取消注释这部分代码
+            html2canvas(card, {
+                scale: 2,
+                logging: false,
+                useCORS: true,
+                allowTaint: true
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = '小红书日记卡片.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+            
+        });
+    </script>
+    
+    <!-- 实际使用时取消注释这行来引入html2canvas -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</body>
+</html>
