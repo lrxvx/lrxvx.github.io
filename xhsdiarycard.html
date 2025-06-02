@@ -72,7 +72,7 @@
         
         textarea {
             width: 100%;
-            height: 180px;
+            height: 200px;
             padding: 15px;
             border: 1px solid #e0e0e0;
             border-radius: 12px;
@@ -128,6 +128,14 @@
             transform: translateY(0);
         }
         
+        .cards-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
         .card-container {
             position: relative;
             width: 100%;
@@ -136,7 +144,6 @@
             border-radius: 20px;
             box-shadow: var(--card-shadow);
             overflow: hidden;
-            margin-bottom: 30px;
         }
         
         .card-content {
@@ -204,11 +211,10 @@
             z-index: 2;
         }
         
-        /* 新增日期样式 */
         .date-info {
             font-size: 16px;
             color: #666;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             padding-bottom: 15px;
             border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
             position: relative;
@@ -226,7 +232,7 @@
         .keywords {
             font-size: 18px;
             color: var(--primary);
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             position: relative;
             z-index: 2;
             display: flex;
@@ -243,24 +249,36 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
             position: relative;
             z-index: 2;
+            /* 使用space-evenly替代固定间距 */
+            justify-content: space-evenly;
         }
         
         .task-item {
             font-size: 16px;
             color: #555;
-            margin-bottom: 15px;
             display: flex;
             align-items: flex-start;
             line-height: 1.5;
             background: rgba(255, 255, 255, 0.7);
-            padding: 12px 15px;
+            padding: 10px 15px;
             border-radius: 12px;
             backdrop-filter: blur(2px);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
             transition: all 0.3s;
+            margin-bottom: 8px; /* 基础间距 */
+        }
+        
+        /* 根据任务数量动态调整间距 */
+        .tasks.few-items .task-item {
+            margin-bottom: 15px;
+            padding: 12px 15px;
+        }
+        
+        .tasks.many-items .task-item {
+            margin-bottom: 5px;
+            padding: 8px 15px;
         }
         
         .task-item:hover {
@@ -285,6 +303,14 @@
             z-index: 2;
         }
         
+        .page-indicator {
+            text-align: center;
+            font-size: 14px;
+            color: var(--primary);
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
         /* 响应式调整 */
         @media (max-width: 600px) {
             .header {
@@ -301,7 +327,6 @@
             
             .task-item {
                 font-size: 15px;
-                padding: 10px 12px;
             }
         }
     </style>
@@ -318,14 +343,15 @@
 2025/5/31，周六，在职场做副业
 
 1、6月星球抽奖开启，这次换微信群抽奖
-
 2、小红书养号，刷AI编程，知识库的内容，关注收藏一些博主和帖子
-
 3、提前把明天的文章准备好
-
 4、刷两节小红书短视频课内容
-
-5、用扣子做小红书日记图，调整提示词"></textarea>
+5、用扣子做小红书日记图，调整提示词
+6、学习新的AI工具使用方法
+7、整理本周工作成果
+8、规划下周内容计划
+9、回复粉丝留言
+10、分析竞品账号"></textarea>
             <p class="example-text">示例格式：第一行标题和关键词，空一行后日期信息，再空一行后是任务项</p>
         </div>
         
@@ -333,29 +359,31 @@
             <button id="generate-btn">
                 <i class="fas fa-magic"></i> 生成卡片
             </button>
-            <button id="download-btn">
-                <i class="fas fa-download"></i> 下载卡片
+            <button id="download-all-btn">
+                <i class="fas fa-download"></i> 下载全部
             </button>
         </div>
         
-        <div class="card-container" id="card">
-            <div class="card-content">
-                <!-- 装饰元素 -->
-                <div class="decor-circle circle-1"></div>
-                <div class="decor-circle circle-2"></div>
-                <div class="decor-line line-1"></div>
-                <div class="decor-line line-2"></div>
-                
-                <!-- 卡片内容 -->
-                <div class="header">小路的一人企业日记第X天</div>
-                <div class="date-info">日期信息将显示在这里</div>
-                <div class="keywords">关键词将显示在这里</div>
-                <div class="tasks">
-                    <div class="task-item"><span class="task-number">1.</span>任务内容将显示在这里</div>
-                    <div class="task-item"><span class="task-number">2.</span>请输入内容后点击"生成卡片"</div>
-                    <div class="task-item"><span class="task-number">3.</span>然后可以点击"下载卡片"保存</div>
+        <div class="cards-container" id="cards-container">
+            <!-- 卡片将在这里动态生成 -->
+            <div class="card-container">
+                <div class="card-content">
+                    <div class="decor-circle circle-1"></div>
+                    <div class="decor-circle circle-2"></div>
+                    <div class="decor-line line-1"></div>
+                    <div class="decor-line line-2"></div>
+                    
+                    <div class="header">小路的一人企业日记第X天</div>
+                    <div class="date-info">日期信息将显示在这里</div>
+                    <div class="keywords">关键词将显示在这里</div>
+                    <div class="tasks few-items">
+                        <div class="task-item"><span class="task-number">1.</span>任务内容将显示在这里</div>
+                        <div class="task-item"><span class="task-number">2.</span>请输入内容后点击"生成卡片"</div>
+                        <div class="task-item"><span class="task-number">3.</span>任务超过7条会自动分页</div>
+                    </div>
+                    <div class="footer">Generated by 小红书日记卡片工具</div>
+                    <div class="page-indicator">1/1</div>
                 </div>
-                <div class="footer">Generated by 小红书日记卡片工具</div>
             </div>
         </div>
     </div>
@@ -407,43 +435,80 @@
                 }
             }
             
-            // 更新卡片内容
-            document.querySelector('#card .header').textContent = title;
-            document.querySelector('#card .date-info').textContent = dateInfo || '未设置日期';
-            document.querySelector('#card .keywords').textContent = keywords || '今日关键词';
+            // 清空现有卡片
+            const cardsContainer = document.getElementById('cards-container');
+            cardsContainer.innerHTML = '';
             
-            const tasksContainer = document.querySelector('#card .tasks');
-            tasksContainer.innerHTML = '';
+            // 计算需要多少页(每页最多7个任务)
+            const tasksPerPage = 7;
+            const pageCount = Math.ceil(tasks.length / tasksPerPage);
             
-            tasks.forEach((task, index) => {
-                const taskItem = document.createElement('div');
-                taskItem.className = 'task-item';
-                taskItem.innerHTML = `<span class="task-number">${index + 1}.</span>${task}`;
-                tasksContainer.appendChild(taskItem);
-            });
+            // 为每页创建卡片
+            for (let page = 0; page < pageCount; page++) {
+                const startIndex = page * tasksPerPage;
+                const endIndex = startIndex + tasksPerPage;
+                const pageTasks = tasks.slice(startIndex, endIndex);
+                
+                const cardContainer = document.createElement('div');
+                cardContainer.className = 'card-container';
+                
+                // 根据任务数量确定间距类别
+                const spacingClass = pageTasks.length <= 5 ? 'few-items' : 
+                                    pageTasks.length >= 8 ? 'many-items' : '';
+                
+                cardContainer.innerHTML = `
+                    <div class="card-content">
+                        <div class="decor-circle circle-1"></div>
+                        <div class="decor-circle circle-2"></div>
+                        <div class="decor-line line-1"></div>
+                        <div class="decor-line line-2"></div>
+                        
+                        <div class="header">${title}${pageCount > 1 ? ` (${page+1}/${pageCount})` : ''}</div>
+                        <div class="date-info">${dateInfo || '未设置日期'}</div>
+                        <div class="keywords">${keywords || '今日关键词'}</div>
+                        <div class="tasks ${spacingClass}">
+                            ${pageTasks.map((task, index) => `
+                                <div class="task-item">
+                                    <span class="task-number">${startIndex + index + 1}.</span>${task}
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="footer">Generated by 小红书日记卡片工具</div>
+                        ${pageCount > 1 ? `<div class="page-indicator">${page+1}/${pageCount}</div>` : ''}
+                    </div>
+                `;
+                
+                cardsContainer.appendChild(cardContainer);
+            }
         });
         
-        document.getElementById('download-btn').addEventListener('click', function() {
-            const card = document.getElementById('card');
+        document.getElementById('download-all-btn').addEventListener('click', function() {
+            const cards = document.querySelectorAll('.card-container');
             
-            // 使用html2canvas库来捕获卡片为图片
-            // 在实际使用中，你需要引入html2canvas库
-            // 这里是一个模拟实现，实际使用时需要取消注释下面的代码
+            if (cards.length === 0) {
+                alert('请先生成卡片');
+                return;
+            }
             
             // alert('下载功能需要引入html2canvas库。\n\n在实际应用中，请取消注释代码中的html2canvas部分。');
             
             
             // 实际使用时取消注释这部分代码
-            html2canvas(card, {
-                scale: 2,
-                logging: false,
-                useCORS: true,
-                allowTaint: true
-            }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = '小红书日记卡片.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
+            // 下载所有卡片
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    html2canvas(card, {
+                        scale: 2,
+                        logging: false,
+                        useCORS: true,
+                        allowTaint: true
+                    }).then(canvas => {
+                        const link = document.createElement('a');
+                        link.download = `小红书日记卡片_${index+1}.png`;
+                        link.href = canvas.toDataURL('image/png');
+                        link.click();
+                    });
+                }, index * 1000); // 延迟1秒下载每张卡片，避免浏览器阻止
             });
             
         });
