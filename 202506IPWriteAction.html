@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP写作40天行动营</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        .poster-container {
+            width: 800px;
+            margin: 20px auto;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #4b6cb7, #182848);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header h2 {
+            margin: 10px 0 0;
+            font-size: 24px;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        
+        .ribbon {
+            position: absolute;
+            top: 20px;
+            right: -50px;
+            background-color: #ff4757;
+            color: white;
+            padding: 8px 50px;
+            transform: rotate(45deg);
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            font-size: 14px;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .section-title {
+            color: #4b6cb7;
+            font-size: 22px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e0e6ed;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .info-item {
+            margin-bottom: 10px;
+        }
+        
+        .info-label {
+            font-weight: 500;
+            color: #4b6cb7;
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            font-size: 16px;
+        }
+        
+        .task-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .task-item {
+            background-color: #f1f5f9;
+            margin-bottom: 10px;
+            padding: 12px 15px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .task-number {
+            background-color: #4b6cb7;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        
+        .task-content {
+            flex-grow: 1;
+        }
+        
+        .task-link {
+            color: #4b6cb7;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .task-link:hover {
+            text-decoration: underline;
+        }
+        
+        .daily-tasks {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .daily-tasks h4 {
+            margin-top: 0;
+            color: #1565c0;
+        }
+        
+        .daily-tasks ul {
+            margin-bottom: 0;
+            padding-left: 20px;
+        }
+        
+        .cta {
+            text-align: center;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .cta h3 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+        
+        .cta p {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .join-btn {
+            display: inline-block;
+            background-color: white;
+            color: #ff7e5f;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .join-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            color: #666;
+            border-top: 1px solid #e0e6ed;
+            margin-top: 20px;
+        }
+        
+        .highlight {
+            background-color: #fffacd;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="poster-container">
+        <div class="ribbon">限时加入</div>
+        <div class="header">
+            <h1>小路&IP写作40天行动营</h1>
+            <h2>从零开始打造你的个人IP写作能力</h2>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h3 class="section-title">行动营简介</h3>
+                <p>40天时间，很长，也很短。在这段旅程中，我们将通过系统训练帮助你掌握IP写作的核心技能，从问答式写作到选题挖掘，从公众号写作到个人IP打造，一步步构建你的写作能力体系。</p>
+                <p><span class="highlight">重点：自己行动起来，40天，不能停！</span></p>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">基本信息</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">开营时间</div>
+                        <div class="info-value">2025年6月11日 - 7月20日</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">参与方式</div>
+                        <div class="info-value">线上社群 + 任务驱动</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">适合人群</div>
+                        <div class="info-value">想打造个人IP的写作者</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">费用说明</div>
+                        <div class="info-value">19.9元（非星球用户）</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">核心任务</h3>
+                <p>本次行动营只需完成以下4个核心任务：</p>
+                <ul class="task-list">
+                    <li class="task-item">
+                        <div class="task-number">1</div>
+                        <div class="task-content">
+                            <strong>一周问答式写作</strong> - 掌握基础写作技巧
+                            <div><a href="https://t.zsxq.com/ZQNYE" class="task-link" target="_blank">任务详情 →</a></div>
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">2</div>
+                        <div class="task-content">
+                            <strong>挖掘选题</strong> - 找到你的写作方向
+                            <div><a href="https://t.zsxq.com/f2xC9" class="task-link" target="_blank">任务详情 →</a></div>
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">3</div>
+                        <div class="task-content">
+                            <strong>IP公众号写作</strong> - 打造专业内容
+                            <div><a href="https://t.zsxq.com/VFcFP" class="task-link" target="_blank">任务详情 →</a></div>
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">4</div>
+                        <div class="task-content">
+                            <strong>IP的自我介绍</strong> - 展示你的专业形象
+                            <div><a href="https://t.zsxq.com/af2vz" class="task-link" target="_blank">任务详情 →</a></div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="daily-tasks">
+                    <h4>每日任务要求</h4>
+                    <ul>
+                        <li>根据进度，完成写作任务</li>
+                        <li>将作业发到群里</li>
+                        <li>持续40天不间断</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">你将获得</h3>
+                <ul>
+                    <li><strong>监督提醒</strong> - 帮助你保持写作节奏</li>
+                    <li><strong>专业解答</strong> - 随时解决你的写作问题</li>
+                    <li><strong>选题建议</strong> - 根据你的业务方向定制选题</li>
+                    <li><strong>写作反馈</strong> - 提升你的写作质量</li>
+                </ul>
+                <p>我会提供选题方向，只需将你的业务方向告诉我，就能获得定制化的写作建议！</p>
+            </div>
+            
+            <div class="cta">
+                <h3>立即加入40天蜕变之旅</h3>
+                <p>4个任务，40天，难度并不小，但收获更大！</p>
+                <a href="https://mp.weixin.qq.com/s/J8F7pgibS5vA4yuicXd_Eg" class="join-btn" target="_blank">马上报名</a>
+            </div>
+            
+            <div class="footer">
+                <p>招募贴：<a href="https://t.zsxq.com/hU1gM" target="_blank">https://t.zsxq.com/hU1gM</a> | 任务贴：<a href="https://t.zsxq.com/hU1gM" target="_blank">https://t.zsxq.com/hU1gM</a></p>
+                <p>可中途参加（不能走押金）| 有任何问题，群里提问，我会解答</p>
+                <p>可加微信了解：xiaoluv12</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
